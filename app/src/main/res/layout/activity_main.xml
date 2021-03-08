@@ -26,10 +26,6 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="14dp"
-        android:layout_weight="1" />
     <Button
         android:id="@+id/beers_button"
         android:layout_width="fill_parent"
@@ -60,16 +56,6 @@
         android:radius="5dp"
         android:backgroundTint="#F6C101"/>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_weight="1" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:layout_gravity="bottom"
-        app:menu="@menu/nav_items"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </LinearLayout>
