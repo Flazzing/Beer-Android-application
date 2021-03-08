@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">beer_app</string>
+    <string name="app_name">A Beer A Day</string>
+    <string name="beers">Beers</string>
+    <string name="breweries">Breweries</string>
+    <string name="rando_beer">Random Beer</string>
+    <string name="beer_me">Beer Me</string>
 </resources>
