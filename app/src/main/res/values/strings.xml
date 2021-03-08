@@ -4,4 +4,13 @@
     <string name="breweries">Breweries</string>
     <string name="rando_beer">Random Beer</string>
     <string name="beer_me">Beer Me</string>
+    <string name="nav_beer">Beer</string>
+    <string name="nav_brewery">Brewery</string>
+    <string name="nav_random">Random Beer</string>
+    <string name="beer_name">Beer Name</string>
+    <string name="item_share">Share</string>
+    <string name="beer_ingredients">Ingredients</string>
+    <string name="list_of_breweries">Found at: Breweries</string>
+    <string name="beer_year">Year of Beer</string>
+    <string name="beer_organic_status">Organic?</string>
 </resources>
