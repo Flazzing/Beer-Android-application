@@ -8,10 +8,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button rando_beer;
     private Button list_of_beer_btn;
-    private static final String BREWERYDB_APPID = "3034caa39d772f54b5c636c2e7b4733e";
+
+      /*
+     * To use your own API key, create a file called `gradle.properties` in your
+     * GRADLE_USER_HOME directory (this will usually be `$HOME/.gradle/` in MacOS/Linux and
+     * `$USER_HOME/.gradle/` in Windows), and add the following line:
+     *
+     *   BREWERYDB_API_KEY="<put_your_own_BREWERYDB_API_key_here>"
+     *
+     * https://www.brewerydb.com make an account and get api key under developer tab
+     */
+
+    private static final String BREWERYDB_APPID = BuildConfig.BREWERYDB_API_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
