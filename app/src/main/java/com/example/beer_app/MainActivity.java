@@ -11,7 +11,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button rando_beer;
     private Button list_of_beer_btn;
-
+    private static final String BREWERYDB_APPID = "3034caa39d772f54b5c636c2e7b4733e";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.random_beer_button:
-                Log.d("MainActivity", "clicked random beer");
                 Intent intent = new Intent(this, RandoBeer.class);
                 this.startActivity(intent);
+                break;
+            default:
+                break;
 
         }
 
