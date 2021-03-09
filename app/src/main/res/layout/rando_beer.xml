@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relativeLayout1"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent">
 
     <Button
         android:id="@+id/button1"
@@ -12,5 +13,17 @@
         android:layout_centerHorizontal="true"
         android:text="@string/beer_me"
         android:background="@drawable/round_button"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/nav_items"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
 </RelativeLayout>
