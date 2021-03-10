@@ -10,8 +10,7 @@ import android.widget.Button;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button rando_beer;
-    private Button list_of_beer_btn;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
       /*
      * To use your own API key, create a file called `gradle.properties` in your
@@ -25,6 +24,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String BREWERYDB_APPID = BuildConfig.BREWERYDB_API_KEY;
 
+    private Button rando_beer;
+    private Button list_of_beer_btn;
+    private Button list_of_brewery_btn;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,19 +40,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list_of_beer_btn = findViewById(R.id.beers_button);
         list_of_beer_btn.setOnClickListener(this);
 
+        list_of_brewery_btn = findViewById(R.id.breweries_button);
+        list_of_brewery_btn.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.beers_button:
+                Log.d(TAG, "beer list intent launch");
                 Intent beer_list_intent = new Intent(this, ListBeer.class);
                 this.startActivity(beer_list_intent);
                 break;
 
             case R.id.random_beer_button:
+                Log.d(TAG, "random beer intent launch");
                 Intent intent = new Intent(this, RandoBeer.class);
                 this.startActivity(intent);
+                break;
+            case R.id.breweries_button:
+                Log.d(TAG, "brewery list intent launch");
+                Intent brewery_list_intent = new Intent(this, ListBrewery.class);
+                this.startActivity(brewery_list_intent);
                 break;
             default:
                 break;

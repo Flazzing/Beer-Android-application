@@ -16,6 +16,9 @@
         <activity
             android:name=".ListBeer"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ListBrewery"
+            android:parentActivityName=".MainActivity" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

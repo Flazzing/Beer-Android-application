@@ -51,15 +51,6 @@
         android:textSize="20dp"/>
 
     <TextView
-        android:id="@+id/brewery_description_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:text= "@string/brewery_location"
-        android:textSize="20dp"/>
-
-    <TextView
         android:id="@+id/beer_description_organic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,7 +62,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="100dp"
         android:layout_weight="1" />
 
     <TextView
@@ -95,7 +86,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="100dp"
         android:layout_weight="1" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
