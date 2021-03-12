@@ -7,6 +7,7 @@
     <string name="nav_beer">Beer</string>
     <string name="nav_brewery">Brewery</string>
     <string name="nav_random">Random Beer</string>
+    <string name="nav_favorite">Favorites</string>
     <string name="beer_name">Beer Name</string>
     <string name="item_share">Share</string>
     <string name="beer_ingredients">Ingredients</string>
