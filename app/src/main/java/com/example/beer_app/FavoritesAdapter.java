@@ -1,6 +1,7 @@
 package com.example.beer_app;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,16 +24,11 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         this.onFavoritesItemClickListener = onFavoritesItemClickListener;
     }
 
-    public void initalizeResults(List<FavoritesData> favoritesDataList) {
-        this.favoritesDataList = favoritesDataList;
-        notifyDataSetChanged();
-    }
-
     public interface OnFavoritesItemClickListener {
         void onFavoritesItemClick(FavoritesData favoritesData);
     }
 
-    public boolean hasLocation(FavoritesData favoritesData) {
+    /*public boolean hasBeer(FavoritesData favoritesData) {
         if (favoritesData.getName().length() < 1) {
             return true;
         }
@@ -44,13 +40,13 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             }
         }
         return false;
-    }
+    }*/
 
     @NonNull
     @Override
     public FavoritesAdapter.FavoritesItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.favorites_list, parent, false);
+        View itemView = inflater.inflate(R.layout.favorite_list_item, parent, false);
         return new FavoritesItemViewHolder(itemView);
     }
 
@@ -60,15 +56,13 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         holder.bind(favoritesData);
     }
 
-    public void addLocationData(FavoritesData favoritesData) {
-        if (this.favoritesDataList.contains(favoritesData)) {
-            return;
-        }
+    public void addFavoritesData(FavoritesData favoritesData) {
+        Log.d("Favorites adapter","adding favorites");
         this.favoritesDataList.add(favoritesData);
         notifyItemInserted(0);
     }
 
-    public void removeLocationData(FavoritesData favoritesData) {
+    public void removeFavoritesData(FavoritesData favoritesData) {
         this.favoritesDataList.remove(favoritesData);
         notifyDataSetChanged();
     }

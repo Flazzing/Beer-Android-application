@@ -1,6 +1,7 @@
 package com.example.beer_app;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +14,9 @@ public class FavoritesList extends AppCompatActivity
 
     private RecyclerView favoritesListRV;
     private FavoritesAdapter favoritesAdapter;
+    private static final String TAG = FavoritesList.class.getSimpleName();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,10 @@ public class FavoritesList extends AppCompatActivity
 
         this.favoritesAdapter = new FavoritesAdapter(this);
         this.favoritesListRV.setAdapter(this.favoritesAdapter);
+
+        FavoritesData favoritesData = new FavoritesData("sample_id", "sample_name");
+        Log.d(TAG, favoritesData.getId());
+        this.favoritesAdapter.addFavoritesData(favoritesData);
 
     }
 

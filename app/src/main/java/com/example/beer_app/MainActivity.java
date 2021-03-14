@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.startActivity(brewery_list_intent);
                 break;
             case R.id.favorites_beer_button:
+                Log.d(TAG, "favorites list intent launch");
                 Intent favorites_list_intent = new Intent(this, FavoritesList.class);
                 this.startActivity(favorites_list_intent);
             default:
