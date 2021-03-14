@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button rando_beer;
     private Button list_of_beer_btn;
     private Button list_of_brewery_btn;
+    private Button favorites_btn;
 
 
     @Override
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         list_of_brewery_btn = findViewById(R.id.breweries_button);
         list_of_brewery_btn.setOnClickListener(this);
+
+        favorites_btn = findViewById(R.id.favorites_beer_button);
+        favorites_btn.setOnClickListener(this);
 
     }
 
@@ -69,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent brewery_list_intent = new Intent(this, ListBrewery.class);
                 this.startActivity(brewery_list_intent);
                 break;
+            case R.id.favorites_beer_button:
+                Intent favorites_list_intent = new Intent(this, FavoritesList.class);
+                this.startActivity(favorites_list_intent);
             default:
                 break;
 
