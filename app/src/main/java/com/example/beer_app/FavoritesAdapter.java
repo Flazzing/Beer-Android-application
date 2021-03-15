@@ -62,8 +62,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         notifyItemInserted(0);
     }
 
-    public void removeFavoritesData(FavoritesData favoritesData) {
-        this.favoritesDataList.remove(favoritesData);
+    public void removeFavoritesData(int position) {
+      //  this.favoritesDataList.remove(favoritesData);
+        this.favoritesDataList.remove(position);
         notifyDataSetChanged();
     }
 
