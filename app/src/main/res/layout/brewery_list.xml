@@ -3,24 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ListBeer">
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/beer_list_RV"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/brewery_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
         <include
             layout="@layout/nav_bar">
 
         </include>
 
-
     </RelativeLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

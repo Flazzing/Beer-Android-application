@@ -3,16 +3,26 @@
     <string name="beers">Beers</string>
     <string name="breweries">Breweries</string>
     <string name="rando_beer">Random Beer</string>
+    <string name="favorite_beers">Favorite Beers</string>
     <string name="beer_me">Beer Me</string>
     <string name="nav_beer">Beer</string>
     <string name="nav_brewery">Brewery</string>
     <string name="nav_random">Random Beer</string>
+    <string name="nav_favorite">Favorites</string>
     <string name="beer_name">Beer Name</string>
     <string name="item_share">Share</string>
     <string name="beer_ingredients">Ingredients</string>
     <string name="list_of_breweries">Found at: Breweries</string>
     <string name="beer_year">Year of Beer</string>
     <string name="beer_organic_status">Organic?</string>
+
+    <!-- Strings for brewery list and descriptions    -->
+    <string name="brewery_name">Brewery Name</string>
+    <string name="brewery_year">Brewery Established</string>
+    <string name="brewery_location">Brewery Location</string>
+    <string name="brewery_website">Brewery Website</string>
+    <string name="brewery_mail">Brewery Mailing List</string>
+    
     <string name="title_activity_list_beer">ListBeer</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
