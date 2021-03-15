@@ -12,14 +12,9 @@
         <activity
             android:name=".RandoBeer"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".FavoritesList"
-            android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".ListBeer"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".ListBrewery"
             android:parentActivityName=".MainActivity" />
 
         <activity android:name=".MainActivity">

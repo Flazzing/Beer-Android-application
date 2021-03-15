@@ -55,7 +55,7 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
 
         }
 
-    } // class ListBeerItemViewHolder
+    } // class ListBeeerItemViewHolder
 
 
 }

@@ -14,9 +14,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "BREWERYDB_API_KEY", BREWERYDB_API_KEY)
-
     }
 
     buildTypes {
@@ -39,12 +36,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment:2.2.2'
     implementation 'androidx.navigation:navigation-ui:2.2.2'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.room:room-runtime:2.2.6'
-
-    annotationProcessor 'androidx.room:room-compiler:2.2.6'
-
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
