@@ -10,7 +10,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {FavoritesData.class}, version = 1)
+@Database(entities = {FavoritesData.class, BeerListData.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
 
@@ -18,6 +18,7 @@ public abstract class AppDatabase extends RoomDatabase {
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUM_THREADS);
 
     public abstract FavoritesDao favoritesDao();
+    public abstract BeerListDao beerListDao();
 
     static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {

@@ -2,6 +2,9 @@ package com.example.beer_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.beer_app.data.BeerListData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ListBeerAdapter.onListBeerItemClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
       /*
@@ -35,10 +41,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button favorites_btn;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         rando_beer = (Button) findViewById(R.id.random_beer_button);
         rando_beer.setOnClickListener(this);
@@ -51,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         favorites_btn = findViewById(R.id.favorites_beer_button);
         favorites_btn.setOnClickListener(this);
+
 
     }
 
@@ -85,4 +94,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
    }
+
+    @Override
+    public void onForecastItemClick() {
+
+    }
 }
