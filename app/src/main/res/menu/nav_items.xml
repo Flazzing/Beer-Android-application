@@ -3,23 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_beer"
         android:icon="@drawable/baseline_sports_bar_black_24dp"
         android:title="@string/nav_beer"
         android:background="@drawable/border"/>
     <item
-        android:id="@+id/nav_brewery"
         android:icon="@drawable/noun_brewery_3537591"
         android:title="@string/nav_brewery"
         android:background="@drawable/border"/>
     <item
-        android:id="@+id/nav_random_beer"
         android:icon="@drawable/baseline_loop_black_24dp"
         android:title="@string/nav_random"
-        android:background="@drawable/border"/>
-    <item
-        android:id="@+id/nav_favorite_beers"
-        android:icon="@drawable/ic_baseline_star_border_24"
-        android:title="@string/nav_favorite"
         android:background="@drawable/border"/>
 </menu>

@@ -19,7 +19,11 @@
         android:layout_height="42dp"
         android:layout_weight="1" />
 
-    <include
-        layout="@layout/nav_bar"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/nav_items"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
 </RelativeLayout>
