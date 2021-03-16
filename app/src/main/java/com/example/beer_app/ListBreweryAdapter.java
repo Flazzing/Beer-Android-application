@@ -9,12 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.ListBreweryViewHolder> {
-    private ArrayList<Brewery> listBreweries;
+    private List<Brewery> listBreweries;
 
     public ListBreweryAdapter() {
-        this.listBreweries = new ArrayList<Brewery>();
+        this.listBreweries = new List<Brewery>();
     }
 
     @NonNull
@@ -33,8 +34,8 @@ public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.
 
     }
 
-    public void addBrewery(Brewery brewery) {
-        this.listBreweries.add(brewery);
+    public void updateBreweriesList(List<Brewery> breweries) {
+        this.listBreweries = breweries;
         notifyDataSetChanged();
     }
 

@@ -1,11 +1,29 @@
 package com.example.beer_app;
 
-public class Brewery {
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class Brewery implements Serializable {
+    @SerializedName("name")
     private String breweryName;
+
+    @SerializedName("nameShortDisplay")
     private String breweryShortName;
+
+    @SerializedName("description")
+    private String breweryDescription;
+
+    @SerializedName("established")
     private int yearEstablished;
+
+    @SerializedName("isOrganic")
     private boolean isOrganic;
+
+    @SerializedName("website")
     private String breweryWebsite;
+
+    @SerializedName("mailingListUrl")
     private String breweryMailingList;
 
 
@@ -25,6 +43,10 @@ public class Brewery {
 
     public String getBreweryShortName() {
         return breweryShortName;
+    }
+
+    public String getBreweryDescription() {
+        return breweryDescription;
     }
 
     public int getYearEstablished() {
