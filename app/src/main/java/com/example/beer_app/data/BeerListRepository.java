@@ -22,10 +22,10 @@ public class BeerListRepository {
     private static final String TAG = BeerListRepository.class.getSimpleName();
     private static final String BASE_URL = "https://sandbox-api.brewerydb.com/v2/beers/";
 
-    private MutableLiveData<BeerListData> beerListDataMutableLiveData;
+    private MutableLiveData<BeerListDataList> beerListDataMutableLiveData;
     private BreweryService breweryService;
 
-    public LiveData<BeerListData> getBeerListDataMutableLiveData() {
+    public LiveData<BeerListDataList> getBeerListDataMutableLiveData() {
         return beerListDataMutableLiveData;
     }
 
@@ -55,21 +55,23 @@ public class BeerListRepository {
     public void loadData(String apiKey){
         if (shouldFetchData()){
             this.beerListDataMutableLiveData.setValue(null);
-            Call<BeerListData> req = this.breweryService.fetchBeer(apiKey);
-            req.enqueue(new Callback<BeerListData>() {
+            Call<BeerListDataList> req = this.breweryService.fetchBeer(apiKey);
+            req.enqueue(new Callback<BeerListDataList>() {
                 @Override
-                public void onResponse(Call<BeerListData> call, Response<BeerListData> response) {
+                public void onResponse(Call<BeerListDataList> call, Response<BeerListDataList> response) {
                     if (response.code() == 200){
+                        Log.d(TAG, "Success API request: " + call.request().url());
                         beerListDataMutableLiveData.setValue(response.body());
                     }
                     else {
+                        Log.w(TAG,  new Gson().toJson(response));
                         Log.d(TAG, "unsuccessful API request: " + call.request().url());
                         Log.d(TAG, "  -- response status code: " + response.code());
                         Log.d(TAG, "  -- response: " + response.toString());
                     }
                 }
                 @Override
-                public void onFailure(Call<BeerListData> call, Throwable t) {
+                public void onFailure(Call<BeerListDataList> call, Throwable t) {
                     Log.d(TAG, "unsuccessful API request: " + call.request().url());
                     t.printStackTrace();
                 }
@@ -80,7 +82,7 @@ public class BeerListRepository {
     }
 
     private boolean shouldFetchData(){
-        BeerListData beerListData = this.beerListDataMutableLiveData.getValue();
+        BeerListDataList beerListData = this.beerListDataMutableLiveData.getValue();
         if (beerListData == null){
             return true;
         }

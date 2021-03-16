@@ -2,6 +2,7 @@ package com.example.beer_app;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beer_app.data.BeerListData;
+import com.example.beer_app.data.BeerListDataList;
 
 import java.util.List;
 
@@ -36,25 +38,13 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
 
          this.listBeerViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(ListBeerViewModel.class);
 
-        this.listBeerViewModel.loadData(BREWERYDB_APPID);
+         this.listBeerViewModel.loadData(BREWERYDB_APPID);
 
-         this.listBeerViewModel.getAllBookmarkedLocation().observe(this, new Observer<List<BeerListData>>() {
+         this.listBeerViewModel.getBeerListRepositoryLiveData().observe(this, new Observer<BeerListDataList>() {
              @Override
-             public void onChanged(List<BeerListData> beerListData) {
-                for (int i = 0; i < beerListData.size(); i++){
-                    Log.d("testest", beerListData.get(i).getName());
-                }
-                 listBeerAdapter.updateBeerData(beerListData);
-             }
-         });
+             public void onChanged(BeerListDataList beerListDataList) {
+                 listBeerAdapter.updateBeerData(beerListDataList);
 
-         this.listBeerViewModel.getAllBookmarkedLocation().observe(this, new Observer<List<BeerListData>>() {
-             @Override
-             public void onChanged(List<BeerListData> beerListData) {
-                 listBeerAdapter.updateBeerData(beerListData);
-                 if (beerListData != null){
-                     listBeerAdapter.updateBeerData(beerListData);
-                 }
              }
          });
 
