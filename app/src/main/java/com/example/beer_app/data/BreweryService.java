@@ -7,7 +7,7 @@ import retrofit2.http.Query;
 
 public interface BreweryService {
     @GET(".")
-    Call<BeerListData> fetchBeer(
+    Call<BeerListDataList> fetchBeer(
             @Query("key") String apiKey
     );
 

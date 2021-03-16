@@ -1,9 +1,12 @@
 package com.example.beer_app.data;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
@@ -17,13 +20,11 @@ import java.lang.reflect.Type;
 @Entity(tableName = "beerList")
 public class BeerListData implements Serializable {
 
-    public BeerListData(@NonNull String name, String displayName, String description, String alcoholVolume, String productionStatus, int year) {
+    public BeerListData(@NonNull String name, String displayName,  String productionStatus) {
         this.name = name;
         this.displayName = displayName;
-        this.description = description;
-        this.alcoholVolume = alcoholVolume;
         this.productionStatus = productionStatus;
-        this.year = year;
+
     }
 
     @PrimaryKey
@@ -34,17 +35,9 @@ public class BeerListData implements Serializable {
     @SerializedName("nameDisplay")
     private String displayName;
 
-    @SerializedName("description")
-    private String description;
-
-    @SerializedName("abv")
-    private String alcoholVolume;
-
     @SerializedName("isRetired")
     private String productionStatus;
 
-    @SerializedName("year")
-    private int year;
 
     public void setName(@NonNull String name) {
         this.name = name;
@@ -54,20 +47,8 @@ public class BeerListData implements Serializable {
         this.displayName = displayName;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setAlcoholVolume(String alcoholVolume) {
-        this.alcoholVolume = alcoholVolume;
-    }
-
     public void setProductionStatus(String productionStatus) {
         this.productionStatus = productionStatus;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
     }
 
 
@@ -81,36 +62,22 @@ public class BeerListData implements Serializable {
         return displayName;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getAlcoholVolume() {
-        return alcoholVolume;
-    }
-
     public String getProductionStatus() {
         return productionStatus;
     }
 
-    public int getYear() {
-        return year;
-    }
 
 
     public static class JsonDeserializer implements com.google.gson.JsonDeserializer<BeerListData> {
         @Override
         public BeerListData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject listObj = json.getAsJsonObject();
-
+            JsonObject styleObj = listObj.getAsJsonObject("style");
 
             return new BeerListData(
                     listObj.getAsJsonPrimitive("name").getAsString(),
                     listObj.getAsJsonPrimitive("nameDisplay").getAsString(),
-                    listObj.getAsJsonPrimitive("description").getAsString(),
-                    listObj.getAsJsonPrimitive("abv").getAsString(),
-                    listObj.getAsJsonPrimitive("isRetired").getAsString(),
-                    listObj.getAsJsonPrimitive("year").getAsInt()
+                    listObj.getAsJsonPrimitive("isRetired").getAsString()
                     );
     }
     }
