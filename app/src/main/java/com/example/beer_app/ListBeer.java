@@ -1,5 +1,6 @@
 package com.example.beer_app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -85,6 +86,7 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
             case R.id.action_settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
+                setResult(Activity.RESULT_OK);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
