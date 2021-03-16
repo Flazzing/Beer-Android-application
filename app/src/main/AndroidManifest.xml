@@ -16,6 +16,9 @@
             android:parentActivityName=".MainActivity">
         </activity>
         <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".RandoBeer"
             android:parentActivityName=".MainActivity" />
         <activity
