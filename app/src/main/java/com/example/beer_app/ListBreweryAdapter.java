@@ -71,7 +71,9 @@ public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-        
+                    breweryCLickListener.onBreweryClicked(
+                            listBreweries.get(getAdapterPosition())
+                    );
                 }
             });
         }
