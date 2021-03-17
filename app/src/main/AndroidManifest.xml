@@ -17,7 +17,7 @@
         </activity>
         <activity
             android:name=".BreweryDetailActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ListBrewery">
         </activity>
         <activity
             android:name=".RandoBeer"
