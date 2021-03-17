@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beer_app.data.FavoritesData;
+
+import java.util.List;
 
 public class FavoritesList extends AppCompatActivity
         implements FavoritesAdapter.OnFavoritesItemClickListener {
@@ -37,12 +40,22 @@ public class FavoritesList extends AppCompatActivity
         this.favoritesAdapter = new FavoritesAdapter(this);
         this.favoritesListRV.setAdapter(this.favoritesAdapter);
 
-        FavoritesData favoritesData = new FavoritesData("sample_id", "sample_name");
-        FavoritesData favoritesData2 = new FavoritesData("sample_id2", "sample_name2");
 
-        Log.d(TAG, favoritesData.getId());
-        this.favoritesAdapter.addFavoritesData(favoritesData);
-        this.favoritesAdapter.addFavoritesData(favoritesData2);
+        this.favoritesViewModel.getAllFavoriteBeers().observe(this,
+                new Observer<List<FavoritesData>>() {
+                    @Override
+                    public void onChanged(List<FavoritesData> favoritesDataList) {
+                        favoritesAdapter.updateData(favoritesDataList);
+
+                    }
+                });
+
+        //FavoritesData favoritesData = new FavoritesData("sample_id", "sample_name");
+        //FavoritesData favoritesData2 = new FavoritesData("sample_id2", "sample_name2");
+
+        //Log.d(TAG, favoritesData.getId());
+        //this.favoritesAdapter.addFavoritesData(favoritesData);
+        //this.favoritesAdapter.addFavoritesData(favoritesData2);
 
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT ) {
@@ -56,7 +69,10 @@ public class FavoritesList extends AppCompatActivity
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 //Remove swiped item from list and notify the RecyclerView
                 int position = viewHolder.getAdapterPosition();
+                FavoritesData favoritesData = favoritesAdapter.getData(position);
                 favoritesAdapter.removeFavoritesData(position);
+                favoritesViewModel.deleteFavoritesData(favoritesData);
+
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);

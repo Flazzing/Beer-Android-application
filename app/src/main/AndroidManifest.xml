@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Beer_app">
         <activity
-            android:name=".BreweryDetailActivity"
+            android:name=".BeerDetailActivity"
             android:parentActivityName=".MainActivity">
         </activity>
         <activity

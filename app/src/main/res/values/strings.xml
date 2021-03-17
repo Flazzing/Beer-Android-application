@@ -55,4 +55,5 @@
     <string name="pref_units_mt10_entry"> More than 10% </string>
     <string name="pref_units_default_value" translatable="false">@string/pref_units_8to10_value</string>
 
+    <string name="drawer_title">Favorites</string>
 </resources>
