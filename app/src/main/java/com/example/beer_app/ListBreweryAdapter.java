@@ -51,7 +51,12 @@ public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.
 
     @Override
     public int getItemCount() {
-        return this.listBreweries.size();
+        if(this.listBreweries != null) {
+            return this.listBreweries.size();
+        }
+        else {
+            return 0;
+        }
     }
 
     class ListBreweryViewHolder extends RecyclerView.ViewHolder {

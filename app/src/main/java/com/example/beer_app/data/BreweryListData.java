@@ -1,5 +1,7 @@
 package com.example.beer_app.data;
 
+import android.util.Log;
+
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -19,9 +21,6 @@ public class BreweryListData implements Serializable {
     @SerializedName("description")
     private String breweryDescription;
 
-    @SerializedName("established")
-    private int yearEstablished;
-
     @SerializedName("website")
     private String breweryWebsite;
 
@@ -29,11 +28,10 @@ public class BreweryListData implements Serializable {
     private String breweryMailingList;
 
 
-    public BreweryListData(String breweryName, String breweryShortName, int yearEstablished, String breweryDescription, String breweryWebsite, String breweryMailingList) {
+    public BreweryListData(String breweryName, String breweryShortName, String breweryDescription, String breweryWebsite, String breweryMailingList) {
         this.breweryName = breweryName;
         this.breweryShortName = breweryShortName;
         this.breweryDescription = breweryDescription;
-        this.yearEstablished = yearEstablished;
         this.breweryWebsite = breweryWebsite;
         this.breweryMailingList = breweryMailingList;
     }
@@ -51,10 +49,6 @@ public class BreweryListData implements Serializable {
         return breweryDescription;
     }
 
-    public int getYearEstablished() {
-        return yearEstablished;
-    }
-
     public String getBreweryWebsite() {
         return breweryWebsite;
     }
@@ -68,14 +62,39 @@ public class BreweryListData implements Serializable {
         public BreweryListData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject listObj = json.getAsJsonObject();
 
+            String tempName = "N/A";
+            String tempShortName = "N/A";
+            String tempDescription= "Description is empty.";
+            String tempWebsite = "No Website";
+            String tempMailingList = "No mailing list";
+
+            if (listObj == null ){
+                tempDescription = "Description is empty.";
+            }
+            else {
+                if (listObj.getAsJsonPrimitive("name") != null) {
+                    tempName = listObj.getAsJsonPrimitive("name").getAsString();
+                }
+                if (listObj.getAsJsonPrimitive("nameShortDisplay") != null) {
+                    tempShortName = listObj.getAsJsonPrimitive("nameShortDisplay").getAsString();
+                }
+                if (listObj.getAsJsonPrimitive("description") != null) {
+                    tempDescription = listObj.getAsJsonPrimitive("description").getAsString();
+                }
+                if (listObj.getAsJsonPrimitive("website") != null) {
+                    tempWebsite = listObj.getAsJsonPrimitive("website").getAsString();
+                }
+                if (listObj.getAsJsonPrimitive("mailingListURL") != null) {
+                    tempMailingList = listObj.getAsJsonPrimitive("mailingListURL").getAsString();
+                }
+            }
 
             return new BreweryListData(
-                    listObj.getAsJsonPrimitive("name").getAsString(),
-                    listObj.getAsJsonPrimitive("nameShortDisplay").getAsString(),
-                    listObj.getAsJsonPrimitive("established").getAsInt(),
-                    listObj.getAsJsonPrimitive("description").getAsString(),
-                    listObj.getAsJsonPrimitive("website").getAsString(),+
-                    listObj.getAsJsonPrimitive("mailingListURL").getAsString()
+                    tempName,
+                    tempShortName,
+                    tempDescription,
+                    tempWebsite,
+                    tempMailingList
             );
         }
     }

@@ -42,7 +42,7 @@ public class ListBrewery extends AppCompatActivity implements ListBreweryAdapter
                 new Observer<List<BreweryListData>>() {
                     @Override
                     public void onChanged(List<BreweryListData> breweries) {
-                        ListBreweryAdapter.updateBreweriesList(breweries);
+                        breweryAdapter.updateBreweriesList(breweries);
                     }
                 }
         );

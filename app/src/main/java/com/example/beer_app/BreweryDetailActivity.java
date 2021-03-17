@@ -27,9 +27,6 @@ public class BreweryDetailActivity extends AppCompatActivity {
             TextView breweryName = findViewById(R.id.brewery_detail_name);
             breweryName.setText(breweryListData.getBreweryName());
 
-            TextView breweryYearEstablished = findViewById(R.id.beer_detail_year);
-            breweryYearEstablished.setText(breweryListData.getYearEstablished());
-
             TextView breweryDescription = findViewById(R.id.brewery_detail_description);
             breweryDescription.setText(breweryListData.getBreweryDescription());
 

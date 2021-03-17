@@ -9,6 +9,6 @@ public interface BreweriesService {
 //    @GET("/breweries/?key=" + BuildConfig.BREWERYDB_API_KEY)
 //    Call <BreweriesSearchResults> searchBreweries(@Query("p") String query);
 
-    @GET("/breweries/?key=" + BuildConfig.BREWERYDB_API_KEY)
+    @GET("v2/breweries/?key=" + BuildConfig.BREWERYDB_API_KEY)
     Call <BreweryListDataList> searchBreweries();
 }
