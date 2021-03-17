@@ -31,35 +31,6 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/brewery_detail_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0" />
-
-    <TextView
-        android:id="@+id/beer_detail_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:text= "@string/brewery_year"
-        android:textSize="20dp"/>
-
-    <TextView
-        android:id="@+id/beer_detail_organic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:text= "@string/beer_organic_status"
-        android:radius="5dp"
-        android:textSize="20dp"/>
-
     <TextView
         android:id="@+id/brewery_detail_description"
         android:layout_width="wrap_content"
@@ -68,7 +39,7 @@
         android:layout_marginLeft="20dp"
         android:text= "@string/beer_organic_status"
         android:radius="5dp"
-        android:textSize="20dp"/>
+        android:textSize="16dp"/>
 
     <TextView
         android:id="@+id/brewery_detail_website"
@@ -91,7 +62,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

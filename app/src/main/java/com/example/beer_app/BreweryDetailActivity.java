@@ -25,7 +25,7 @@ public class BreweryDetailActivity extends AppCompatActivity {
             this.breweryListData = (BreweryListData)intent.getSerializableExtra(EXTRA_BREWERY_DATA);
 
             TextView breweryName = findViewById(R.id.brewery_detail_name);
-            breweryName.setText(breweryListData.getBreweryName());
+            breweryName.setText(breweryListData.getBreweryShortName());
 
             TextView breweryDescription = findViewById(R.id.brewery_detail_description);
             breweryDescription.setText(breweryListData.getBreweryDescription());
