@@ -32,4 +32,28 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- Strings used for fragments for preferences -->
+    <string name="beer_filters">Preferences</string>
+
+    <!-- Strings for Beer Year preference -->
+    <string name="pref_beer_year_key" translatable="false">pref_beer_year</string>
+    <string name="pref_beer_year_title">Beer Year</string>
+
+    <string name="pref_organic_key" translatable="false">pref_organic</string>
+    <string name="pref_organic_title">Organic?</string>
+
+    <!-- Strings for Alc % preference -->
+    <string name="pref_alc_percentage_key" translatable="false">pref_alc_percentage</string>
+    <string name="pref_alc_percentage_title">Alcohol Percentage</string>
+
+    <string name="pref_units_8to10_value" translatable="false">standard</string>
+    <string name="pref_units_lt10_value" translatable="false">metric</string>
+    <string name="pref_units_mt10_value" translatable="false">imperial</string>
+    <string name="pref_units_8to10_entry"> 8% to 10% </string>
+    <string name="pref_units_lt10_entry"> Less than 10% </string>
+    <string name="pref_units_mt10_entry"> More than 10% </string>
+    <string name="pref_units_default_value" translatable="false">@string/pref_units_8to10_value</string>
+
+    <string name="drawer_title">Favorites</string>
 </resources>

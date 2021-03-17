@@ -1,9 +1,12 @@
 package com.example.beer_app.data;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
@@ -17,13 +20,13 @@ import java.lang.reflect.Type;
 @Entity(tableName = "beerList")
 public class BeerListData implements Serializable {
 
-    public BeerListData(@NonNull String name, String displayName, String description, String alcoholVolume, String productionStatus, int year) {
+    public BeerListData(@NonNull String name,  String productionStatus, String isOrganic, String description, String abv) {
         this.name = name;
-        this.displayName = displayName;
-        this.description = description;
-        this.alcoholVolume = alcoholVolume;
+
         this.productionStatus = productionStatus;
-        this.year = year;
+        this.isOrganic = isOrganic;
+        this.description = description;
+        this.abv = abv;
     }
 
     @PrimaryKey
@@ -31,70 +34,59 @@ public class BeerListData implements Serializable {
     @SerializedName("name")
     private String name;
 
-    @SerializedName("nameDisplay")
-    private String displayName;
+    @SerializedName("isRetired")
+    private String productionStatus;
+
+    @SerializedName("isOrganic")
+    private String isOrganic;
 
     @SerializedName("description")
     private String description;
 
     @SerializedName("abv")
-    private String alcoholVolume;
+    private String abv;
 
-    @SerializedName("isRetired")
-    private String productionStatus;
-
-    @SerializedName("year")
-    private int year;
 
     public void setName(@NonNull String name) {
         this.name = name;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setAlcoholVolume(String alcoholVolume) {
-        this.alcoholVolume = alcoholVolume;
     }
 
     public void setProductionStatus(String productionStatus) {
         this.productionStatus = productionStatus;
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-
-
-    @NonNull
-    public String getName() {
-        return name;
-    }
-
-    public String getDisplayName() {
-        return displayName;
+    public void setAbv(String abv) {
+        this.abv = abv;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String getAlcoholVolume() {
-        return alcoholVolume;
+    public void setIsOrganic(String isOrganic) {
+        this.isOrganic = isOrganic;
+    }
+
+    public String getIsOrganic() {
+        return isOrganic;
+    }
+
+    @NonNull
+    public String getName() {
+        return name;
     }
 
     public String getProductionStatus() {
         return productionStatus;
     }
 
-    public int getYear() {
-        return year;
+    public String getAbv() {
+        return abv;
     }
 
 
@@ -104,13 +96,32 @@ public class BeerListData implements Serializable {
             JsonObject listObj = json.getAsJsonObject();
 
 
+            String tempDescription= "Description is empty.";
+            String tempABV = "Description is empty.";
+
+            if (listObj == null ){
+                Log.d("Check checker", "here is empty");
+                tempDescription = "Description is empty.";
+                tempABV = "Description is empty.";
+            }
+            else {
+                Log.d("Check checker", "here is not empty");
+                if (listObj.getAsJsonPrimitive("description") != null) {
+                    tempDescription = listObj.getAsJsonPrimitive("description").getAsString();
+                }
+
+                if (listObj.getAsJsonPrimitive("abv") != null) {
+                    Log.d("checker", "abv");
+                    tempABV = listObj.getAsJsonPrimitive("abv").getAsString();
+                }
+
+            }
+
             return new BeerListData(
                     listObj.getAsJsonPrimitive("name").getAsString(),
-                    listObj.getAsJsonPrimitive("nameDisplay").getAsString(),
-                    listObj.getAsJsonPrimitive("description").getAsString(),
-                    listObj.getAsJsonPrimitive("abv").getAsString(),
                     listObj.getAsJsonPrimitive("isRetired").getAsString(),
-                    listObj.getAsJsonPrimitive("year").getAsInt()
+                    listObj.getAsJsonPrimitive("isOrganic").getAsString(),
+                    tempDescription, tempABV
                     );
     }
     }

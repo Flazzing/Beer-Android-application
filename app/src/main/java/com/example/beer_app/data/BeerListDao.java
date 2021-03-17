@@ -17,7 +17,7 @@ public interface BeerListDao {
     @Delete
     void delete(BeerListData beerListData);
 
-    @Query("SELECT * from beerList ORDER BY year DESC")
+    @Query("SELECT * from beerList ORDER BY name DESC")
     LiveData<List<BeerListData>> getAllBeer();
 
     @Query("SELECT * from beerList WHERE name = :beerName LIMIT 1")

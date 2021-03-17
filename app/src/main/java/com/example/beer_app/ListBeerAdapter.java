@@ -1,6 +1,7 @@
 package com.example.beer_app;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beer_app.data.BeerListDao;
 import com.example.beer_app.data.BeerListData;
+import com.example.beer_app.data.BeerListDataList;
 
 import java.util.List;
 
 public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBeeerItemViewHolder>{
 
 
-    private List<BeerListData> beerListDataList;
+    private BeerListDataList beerListDataList;
     private ListBeerAdapter.onListBeerItemClickListener onListBeerItemClickListener;
 
     public interface onListBeerItemClickListener {
@@ -38,10 +40,10 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
 
     @Override
     public void onBindViewHolder(@NonNull ListBeeerItemViewHolder holder, int position) {
-        holder.bind(this.beerListDataList.get(position));
+        holder.bind(this.beerListDataList.getBeerListData().get(position));
     }
 
-    public void updateBeerData(List<BeerListData> beerListData){
+    public void updateBeerData(BeerListDataList beerListData){
         this.beerListDataList = beerListData;
         notifyDataSetChanged();
     }
@@ -49,7 +51,7 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
     @Override
     public int getItemCount() {
         if (this.beerListDataList != null){
-            return this.beerListDataList.size();
+            return this.beerListDataList.getBeerListData().size();
         }
         else {
             return 0;
@@ -58,11 +60,20 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
 
     class ListBeeerItemViewHolder extends RecyclerView.ViewHolder {
 
-        final private TextView textView;
+        final private TextView textView_name;
+        final private TextView textView_isRetired;
+        final private TextView textView_isOrganic;
+        final private TextView textView_description;
+        final private TextView textView_abv;
 
         public ListBeeerItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.beerName_tv);
+            textView_name = itemView.findViewById(R.id.beerName_tv);
+            textView_description = itemView.findViewById(R.id.beer_description_tv);
+            textView_isOrganic = itemView.findViewById(R.id.beerNameIsOrganic_tv);
+            textView_isRetired = itemView.findViewById(R.id.beerNameIsRetired_tv);
+            textView_abv = itemView.findViewById(R.id.beerNameABV_tv);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,7 +84,11 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
         }
 
         public void bind(BeerListData beerListData){
-
+            this.textView_name.setText(beerListData.getName());
+            this.textView_isRetired.setText(beerListData.getProductionStatus());
+            this.textView_isOrganic.setText(beerListData.getIsOrganic());
+            this.textView_description.setText(beerListData.getDescription());
+            this.textView_abv.setText(beerListData.getAbv());
         }
 
     } // class ListBeerItemViewHolder

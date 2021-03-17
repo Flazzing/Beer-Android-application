@@ -22,5 +22,8 @@ public class FavoritesViewModel extends AndroidViewModel {
         this.repository.insertFavorites(favoritesData);
     }
 
-    public LiveData<List<FavoritesData>> getAllFavoriteBeers() { return this.getAllFavoriteBeers(); }
+    public void deleteFavoritesData(FavoritesData favoritesData) {
+        this.repository.deleteFavorites(favoritesData);
+    }
+    public LiveData<List<FavoritesData>> getAllFavoriteBeers() { return this.repository.getAllFavoritedBeers(); }
 }
