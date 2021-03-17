@@ -1,4 +1,4 @@
-package com.example.beer_app;
+package com.example.beer_app.data;
 
 import android.util.Log;
 
@@ -13,14 +13,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class BreweriesRepository {
-    private static final String TAG = BreweriesRepository.class.getSimpleName();
+public class BreweryListRepository {
+    private static final String TAG = BreweryListRepository.class.getSimpleName();
     private static final String BASE_URL = "http://api.brewerydb.com/v2";
 
-    private MutableLiveData<List<Brewery>> breweriesList;
+    private MutableLiveData<List<BreweryListData>> breweriesList;
     private BreweriesService breweriesService;
 
-    public BreweriesRepository() {
+    public BreweryListRepository() {
         this.breweriesList = new MutableLiveData<>();
         this.breweriesList.setValue(null);
 
@@ -30,24 +30,24 @@ public class BreweriesRepository {
                 .build();
     }
 
-    public LiveData<List<Brewery>> getBreweriesList() {
+    public LiveData<List<BreweryListData>> getBreweriesList() {
         return this.breweriesList;
     }
 
     public void loadSearchResults() {
         this.breweriesList.setValue(null);
         Log.d(TAG, "loading search results");
-        Call<BreweriesSearchResults> results = this.breweriesService.searchBreweries();
-        results.enqueue(new Callback<BreweriesSearchResults>() {
+        Call<BreweryListDataList> results = this.breweriesService.searchBreweries();
+        results.enqueue(new Callback<BreweryListDataList>() {
             @Override
-            public void onResponse(Call<BreweriesSearchResults> call, Response<BreweriesSearchResults> response) {
+            public void onResponse(Call<BreweryListDataList> call, Response<BreweryListDataList> response) {
                 if(response.code() == 200) {
-                    breweriesList.setValue(response.body().data);
+                    breweriesList.setValue(response.body().breweryListData);
                 }
             }
 
             @Override
-            public void onFailure(Call<BreweriesSearchResults> call, Throwable t) {
+            public void onFailure(Call<BreweryListDataList> call, Throwable t) {
                 t.printStackTrace();
             }
         });

@@ -9,45 +9,49 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.beer_app.data.BreweryListData;
+
 import java.util.List;
 
-public class ListBrewery extends AppCompatActivity {
+public class ListBrewery extends AppCompatActivity implements ListBreweryAdapter.OnBreweryClickListener {
     private static final String TAG = ListBrewery.class.getSimpleName();
 
     private RecyclerView breweryListRV;
     private ListBreweryAdapter breweryAdapter;
-    private BreweriesViewModel breweriesViewModel;
+    private ListBreweryViewModel listBreweryViewModel;
 
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.brewery_list);
 
-        this.breweryAdapter = new ListBreweryAdapter();
-
+        //setup recyclerview
         this.breweryListRV = findViewById(R.id.brewery_list);
-        this.breweryListRV.setAdapter(this.breweryAdapter);
         this.breweryListRV.setLayoutManager(new LinearLayoutManager(this));
         this.breweryListRV.setHasFixedSize(true);
 
-        this.breweriesViewModel = new ViewModelProvider(this)
-                .get(BreweriesViewModel.class);
-        this.breweriesViewModel.getBreweriesList().observe(
+        //setup adapter and attach to recyclerview
+        this.breweryAdapter = new ListBreweryAdapter(this);
+        this.breweryListRV.setAdapter(this.breweryAdapter);
+
+        //setup viewmodel
+        this.listBreweryViewModel = new ViewModelProvider(this)
+                .get(ListBreweryViewModel.class);
+        listBreweryViewModel.loadSearchResults();
+        this.listBreweryViewModel.getBreweriesList().observe(
                 this,
-                new Observer<List<Brewery>>() {
+                new Observer<List<BreweryListData>>() {
                     @Override
-                    public void onChanged(List<Brewery> breweries) {
+                    public void onChanged(List<BreweryListData> breweries) {
                         ListBreweryAdapter.updateBreweriesList(breweries);
                     }
                 }
         );
-
-        breweriesViewModel.loadSearchResults();
     }
 
     @Override
-    public void onBreweryListItemClick(Brewery brewery) {
+    public void onBreweryClicked(BreweryListData breweryListData) {
         Intent intent = new Intent(this, BreweryDetailActivity.class);
-        intent.putExtra(BreweryDetailActivity.EXTRA_BREWERY_DATA, brewery);
+        intent.putExtra(BreweryDetailActivity.EXTRA_BREWERY_DATA, breweryListData);
         startActivity(intent);
     }
 }

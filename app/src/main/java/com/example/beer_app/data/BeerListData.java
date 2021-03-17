@@ -112,7 +112,7 @@ public class BeerListData implements Serializable {
                     listObj.getAsJsonPrimitive("isRetired").getAsString(),
                     listObj.getAsJsonPrimitive("year").getAsInt()
                     );
-    }
+        }
     }
 
 }

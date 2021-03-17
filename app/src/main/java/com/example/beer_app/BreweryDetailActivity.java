@@ -4,14 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.TextView;
+
+import com.example.beer_app.data.BreweryListData;
 
 public class BreweryDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_BREWERY_DATA = "BreweryDetailActivity.Brewery";
 
-    private Brewery brewery = null;
+    private BreweryListData breweryListData = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,30 +22,22 @@ public class BreweryDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent != null && intent.hasExtra(EXTRA_BREWERY_DATA)) {
-            this.brewery = (Brewery)intent.getSerializableExtra(EXTRA_BREWERY_DATA);
+            this.breweryListData = (BreweryListData)intent.getSerializableExtra(EXTRA_BREWERY_DATA);
 
             TextView breweryName = findViewById(R.id.brewery_detail_name);
-            breweryName.setText(brewery.getBreweryName());
+            breweryName.setText(breweryListData.getBreweryName());
 
             TextView breweryYearEstablished = findViewById(R.id.beer_detail_year);
-            breweryYearEstablished.setText(brewery.getYearEstablished());
-
-            TextView isOrganic = findViewById(R.id.beer_detail_organic);
-            if(brewery.isOrganic()) {
-                isOrganic.setText("Organic");
-            }
-            else {
-                isOrganic.setText("Not Organic");
-            }
+            breweryYearEstablished.setText(breweryListData.getYearEstablished());
 
             TextView breweryDescription = findViewById(R.id.brewery_detail_description);
-            breweryDescription.setText(brewery.getBreweryDescription());
+            breweryDescription.setText(breweryListData.getBreweryDescription());
 
             TextView breweryWebsite = findViewById(R.id.brewery_detail_website);
-            breweryWebsite.setText(brewery.getBreweryWebsite());
+            breweryWebsite.setText(breweryListData.getBreweryWebsite());
 
             TextView breweryMailingList = findViewById(R.id.brewery_detail_mail);
-            breweryMailingList.setText(brewery.getBreweryMailingList());
+            breweryMailingList.setText(breweryListData.getBreweryMailingList());
         }
     }
 }

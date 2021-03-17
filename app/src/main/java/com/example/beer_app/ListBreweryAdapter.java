@@ -8,15 +8,30 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.beer_app.data.BreweryListData;
+
 import java.util.List;
 
 public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.ListBreweryViewHolder> {
-    private List<Brewery> listBreweries;
+    private List<BreweryListData> listBreweries;
+    private OnBreweryClickListener breweryCLickListener;
 
-    public ListBreweryAdapter() {
-        this.listBreweries = new List<Brewery>();
+    interface OnBreweryClickListener {
+        void onBreweryClicked(BreweryListData breweryListData);
     }
+
+    public ListBreweryAdapter(OnBreweryClickListener listener) {
+        this.breweryCLickListener = listener;
+    }
+
+    public void updateBreweriesList(List<BreweryListData> breweries) {
+        this.listBreweries = breweries;
+        notifyDataSetChanged();
+    }
+
+//    public ListBreweryAdapter() {
+//        this.listBreweries = new ArrayList<Brewery>();s
+//    }
 
     @NonNull
     @Override
@@ -29,14 +44,9 @@ public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ListBreweryViewHolder holder, int position) {
-        Brewery brewery = listBreweries.get(position);
-        holder.bind(brewery);
+        BreweryListData breweryListData = listBreweries.get(position);
+        holder.bind(breweryListData);
 
-    }
-
-    public void updateBreweriesList(List<Brewery> breweries) {
-        this.listBreweries = breweries;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -59,8 +69,8 @@ public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.
             });
         }
 
-        void bind(Brewery brewery) {
-            this.breweryName.setText(brewery.getBreweryShortName());
+        void bind(BreweryListData breweryListData) {
+            this.breweryName.setText(breweryListData.getBreweryShortName());
         }
     }
 }
