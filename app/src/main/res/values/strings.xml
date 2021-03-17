@@ -16,7 +16,7 @@
     <string name="beer_year">Year of Beer</string>
     <string name="beer_organic_status">Organic?</string>
 
-    <!-- Strings for brewery list and descriptions    -->
+    <!-- Strings for breweryListData list and descriptions    -->
     <string name="brewery_name">Brewery Name</string>
     <string name="brewery_year">Brewery Established</string>
     <string name="brewery_location">Brewery Location</string>

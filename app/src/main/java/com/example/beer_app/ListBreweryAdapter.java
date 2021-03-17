@@ -8,13 +8,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.beer_app.data.BreweryListData;
+
+import java.util.List;
 
 public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.ListBreweryViewHolder> {
-    private ArrayList<Brewery> listBreweries;
+    private List<BreweryListData> listBreweries;
+    private OnBreweryClickListener breweryCLickListener;
 
-    public ListBreweryAdapter() {
-        this.listBreweries = new ArrayList<Brewery>();
+    interface OnBreweryClickListener {
+        void onBreweryClicked(BreweryListData breweryListData);
+    }
+
+    public ListBreweryAdapter(OnBreweryClickListener listener) {
+        this.breweryCLickListener = listener;
+    }
+
+    public void updateBreweriesList(List<BreweryListData> breweries) {
+        this.listBreweries = breweries;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -28,38 +40,49 @@ public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ListBreweryViewHolder holder, int position) {
-        Brewery brewery = listBreweries.get(position);
-        holder.bind(brewery);
+        BreweryListData breweryListData = listBreweries.get(position);
+        holder.bind(breweryListData);
 
-    }
-
-    public void addBrewery(Brewery brewery) {
-        this.listBreweries.add(brewery);
-        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return this.listBreweries.size();
+        if(this.listBreweries != null) {
+            return this.listBreweries.size();
+        }
+        else {
+            return 0;
+        }
     }
 
     class ListBreweryViewHolder extends RecyclerView.ViewHolder {
-        private TextView breweryName;
+        final private TextView breweryName;
+        final private TextView breweryDescription;
+        final private TextView breweryWebsite;
+        final private TextView breweryMailingList;
 
         public ListBreweryViewHolder(@NonNull View itemView) {
             super(itemView);
             this.breweryName = itemView.findViewById(R.id.brewery_name);
+            this.breweryDescription = itemView.findViewById(R.id.brewery_description);
+            this.breweryWebsite = itemView.findViewById(R.id.brewery_website);
+            this.breweryMailingList = itemView.findViewById(R.id.brewery_mail);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    breweryCLickListener.onBreweryClicked(
+                            listBreweries.get(getAdapterPosition())
+                    );
                 }
             });
         }
 
-        void bind(Brewery brewery) {
-            this.breweryName.setText(brewery.getBreweryShortName());
+        void bind(BreweryListData breweryListData) {
+            this.breweryName.setText(breweryListData.getBreweryShortName());
+            this.breweryDescription.setText(breweryListData.getBreweryDescription());
+            this.breweryWebsite.setText(breweryListData.getBreweryWebsite());
+            this.breweryMailingList.setText(breweryListData.getBreweryMailingList());
         }
     }
 }
