@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.beer_app.data.BeerListData;
+import com.example.beer_app.data.BeerListDataList;
 import com.example.beer_app.data.BeerListRepository;
 
 import java.util.List;
@@ -14,12 +15,16 @@ import java.util.List;
 public class ListBeerViewModel extends AndroidViewModel {
 
     private BeerListRepository beerListRepository;
-    private LiveData<BeerListData> beerListRepositoryLiveData;
+    private LiveData<BeerListDataList> beerListRepositoryLiveData;
 
     public ListBeerViewModel(@NonNull Application application) {
         super(application);
         this.beerListRepository = new BeerListRepository(application);
         this.beerListRepositoryLiveData = beerListRepository.getBeerListDataMutableLiveData();
+    }
+
+    public LiveData<BeerListDataList> getBeerListRepositoryLiveData() {
+        return beerListRepositoryLiveData;
     }
 
     public void loadData(String apiKey){
@@ -34,12 +39,5 @@ public class ListBeerViewModel extends AndroidViewModel {
         this.beerListRepository.deleteBeer(beerListData);
     }
 
-    public LiveData<List<BeerListData>> getAllBookmarkedLocation(){
-        return this.beerListRepository.getAllBeer();
-    }
-
-    public LiveData<List<BeerListData>> getBookmarkedLocationByName(String beerName){
-        return this.beerListRepository.getBeerByName(beerName);
-    }
 
 }

@@ -55,6 +55,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         FavoritesData favoritesData = this.favoritesDataList.get(this.favoritesDataList.size() - position - 1);
         holder.bind(favoritesData);
     }
+    public void updateData(List<FavoritesData> favoritesDataList) {
+        this.favoritesDataList = favoritesDataList;
+        notifyDataSetChanged();
+    }
 
     public void addFavoritesData(FavoritesData favoritesData) {
         Log.d("Favorites adapter","adding favorites");
@@ -67,6 +71,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         notifyItemRemoved(position);
     }
 
+    public FavoritesData getData(int position) {
+        return this.favoritesDataList.get(favoritesDataList.size() - position - 1);
+    }
     @Override
     public int getItemCount() {
         if (this.favoritesDataList == null) {
