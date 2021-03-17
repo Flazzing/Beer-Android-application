@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditTextPreference
+        android:key="@string/pref_beer_year_key"
+        android:title="@string/pref_beer_year_title"
+        app:useSimpleSummaryProvider="true" />
+
+    <ListPreference
+        android:key="@string/pref_alc_percentage_key"
+        android:title="@string/pref_alc_percentage_title"
+        android:dialogTitle="@string/pref_alc_percentage_title"
+        android:entryValues="@array/pref_units_values"
+        android:entries="@array/pref_units_entries"
+        android:defaultValue="@string/pref_units_default_value"
+        app:useSimpleSummaryProvider="true" />
+
+    <CheckBoxPreference
+        android:title="@string/pref_organic_title"
+        android:key="@string/pref_organic_key"
+        android:defaultValue="true" />
+
+</PreferenceScreen>

@@ -23,7 +23,10 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ListBeer"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"/>
+            <activity
+                android:name=".SettingsActivity"
+                android:parentActivityName=".ListBeer" />
         <activity
             android:name=".ListBrewery"
             android:parentActivityName=".MainActivity" />
