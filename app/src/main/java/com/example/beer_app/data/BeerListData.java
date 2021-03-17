@@ -123,7 +123,6 @@ public class BeerListData implements Serializable {
                     listObj.getAsJsonPrimitive("isOrganic").getAsString(),
                     tempDescription, tempABV
                     );
+        }
     }
-    }
-
 }
