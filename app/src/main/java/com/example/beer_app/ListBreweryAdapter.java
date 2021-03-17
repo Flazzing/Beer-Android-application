@@ -29,10 +29,6 @@ public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.
         notifyDataSetChanged();
     }
 
-//    public ListBreweryAdapter() {
-//        this.listBreweries = new ArrayList<Brewery>();s
-//    }
-
     @NonNull
     @Override
     public ListBreweryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,22 +56,31 @@ public class ListBreweryAdapter extends RecyclerView.Adapter<ListBreweryAdapter.
     }
 
     class ListBreweryViewHolder extends RecyclerView.ViewHolder {
-        private TextView breweryName;
+        final private TextView breweryName;
+        final private TextView breweryDescription;
+        final private TextView breweryWebsite;
+        final private TextView breweryMailingList;
 
         public ListBreweryViewHolder(@NonNull View itemView) {
             super(itemView);
             this.breweryName = itemView.findViewById(R.id.brewery_name);
+            this.breweryDescription = itemView.findViewById(R.id.brewery_description);
+            this.breweryWebsite = itemView.findViewById(R.id.brewery_website);
+            this.breweryMailingList = itemView.findViewById(R.id.brewery_mail);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+        
                 }
             });
         }
 
         void bind(BreweryListData breweryListData) {
             this.breweryName.setText(breweryListData.getBreweryShortName());
+            this.breweryDescription.setText(breweryListData.getBreweryDescription());
+            this.breweryWebsite.setText(breweryListData.getBreweryWebsite());
+            this.breweryMailingList.setText(breweryListData.getBreweryMailingList());
         }
     }
 }
