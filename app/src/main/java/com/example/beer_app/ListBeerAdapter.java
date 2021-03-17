@@ -1,6 +1,7 @@
 package com.example.beer_app;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,11 +60,20 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
 
     class ListBeeerItemViewHolder extends RecyclerView.ViewHolder {
 
-        final private TextView textView;
+        final private TextView textView_name;
+        final private TextView textView_isRetired;
+        final private TextView textView_isOrganic;
+        final private TextView textView_description;
+        final private TextView textView_abv;
 
         public ListBeeerItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.beerName_tv);
+            textView_name = itemView.findViewById(R.id.beerName_tv);
+            textView_description = itemView.findViewById(R.id.beer_description_tv);
+            textView_isOrganic = itemView.findViewById(R.id.beerNameIsOrganic_tv);
+            textView_isRetired = itemView.findViewById(R.id.beerNameIsRetired_tv);
+            textView_abv = itemView.findViewById(R.id.beerNameABV_tv);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -74,7 +84,11 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
         }
 
         public void bind(BeerListData beerListData){
-            this.textView.setText(beerListData.getName());
+            this.textView_name.setText(beerListData.getName());
+            this.textView_isRetired.setText(beerListData.getProductionStatus());
+            this.textView_isOrganic.setText(beerListData.getIsOrganic());
+            this.textView_description.setText(beerListData.getDescription());
+            this.textView_abv.setText(beerListData.getAbv());
         }
 
     } // class ListBeerItemViewHolder

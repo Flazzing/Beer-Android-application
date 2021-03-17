@@ -44,7 +44,6 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
              @Override
              public void onChanged(BeerListDataList beerListDataList) {
                  listBeerAdapter.updateBeerData(beerListDataList);
-
              }
          });
 
