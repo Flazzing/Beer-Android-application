@@ -64,13 +64,12 @@ public class ListBeer extends AppCompatActivity
 
         this.listBeerViewModel.loadData(BREWERYDB_APPID);
 
-        this.listBeerViewModel.getBeerListRepositoryLiveData().observe(this, new Observer<BeerListDataList>() {
-            @Override
-            public void onChanged(BeerListDataList beerListDataList) {
-                listBeerAdapter.updateBeerData(beerListDataList);
-
-            }
-        });
+         this.listBeerViewModel.getBeerListRepositoryLiveData().observe(this, new Observer<BeerListDataList>() {
+             @Override
+             public void onChanged(BeerListDataList beerListDataList) {
+                 listBeerAdapter.updateBeerData(beerListDataList);
+             }
+         });
 
     }
 
