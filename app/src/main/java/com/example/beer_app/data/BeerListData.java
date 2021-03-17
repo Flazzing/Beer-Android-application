@@ -100,18 +100,18 @@ public class BeerListData implements Serializable {
             String tempABV = "Description is empty.";
 
             if (listObj == null ){
-                Log.d("Check checker", "here is empty");
+//                Log.d("Check checker", "here is empty");
                 tempDescription = "Description is empty.";
                 tempABV = "Description is empty.";
             }
             else {
-                Log.d("Check checker", "here is not empty");
+//                Log.d("Check checker", "here is not empty");
                 if (listObj.getAsJsonPrimitive("description") != null) {
                     tempDescription = listObj.getAsJsonPrimitive("description").getAsString();
                 }
 
                 if (listObj.getAsJsonPrimitive("abv") != null) {
-                    Log.d("checker", "abv");
+//                    Log.d("checker", "abv");
                     tempABV = listObj.getAsJsonPrimitive("abv").getAsString();
                 }
 

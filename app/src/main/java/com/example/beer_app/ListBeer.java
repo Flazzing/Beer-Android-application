@@ -52,8 +52,8 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
                 new ViewModelProvider.AndroidViewModelFactory(getApplication()))
                 .get(FavoritesViewModel.class);
 
-        FavoritesData favoritesData = new FavoritesData("sample_id", "sample_name_from_list_beer");
-        this.favoritesViewModel.insertFavoritesData(favoritesData);
+//        FavoritesData favoritesData = new FavoritesData("sample_id", "sample_name_from_list_beer");
+//        this.favoritesViewModel.insertFavoritesData(favoritesData);
 
         //setup 1
         this.recyclerView = findViewById(R.id.beer_list_RV);
