@@ -9,7 +9,6 @@ public interface BreweryService {
     @GET("beers")
     Call<BeerListDataList> fetchBeer(
             @Query("abv") String percent,
-            @Query("isOrganic") String organic,
             @Query("year") String year,
             @Query("key") String apiKey
     );

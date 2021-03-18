@@ -16,9 +16,5 @@
         android:defaultValue="@string/pref_units_default_value"
         app:useSimpleSummaryProvider="true" />
 
-    <CheckBoxPreference
-        android:title="@string/pref_organic_title"
-        android:key="@string/pref_organic_key"
-        android:defaultValue="true" />
 
 </PreferenceScreen>

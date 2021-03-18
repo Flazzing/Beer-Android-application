@@ -121,19 +121,14 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
 
         this.listBeerViewModel.loadData(
                 this.sharedPreferences.getString(
-                        "8,10",
-                        "8,10"
+                        getString(R.string.pref_alc_percentage_key),
+                        ""
                 ),
                 this.sharedPreferences.getString(
-                        "Y",
-                        "Y"
-                ),
-                this.sharedPreferences.getString(
-                        "2015",
-                        "2015"
+                        getString(R.string.pref_beer_year_key),
+                        ""
                 ),
                 BREWERYDB_APPID
-
         );
     }
 
@@ -141,5 +136,6 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
     public void onListBeerItemClick(BeerListData beerListData) {
         Intent intent = new Intent(this, BeerDetailActivity.class);
         startActivity(intent);
+        setResult(Activity.RESULT_OK);
     }
 }

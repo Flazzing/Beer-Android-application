@@ -58,14 +58,14 @@ public class BeerListRepository {
         this.beerListDao = db.beerListDao();
     }
 
-    public void loadData(String percent, String organic, String year, String apiKey){
-        if (shouldFetchData(percent, organic, year)){
-            Log.d(TAG, "fetching new forecast data for year: " + year + " percent: " + percent + " organic: " + organic + "key: " + apiKey);
+    public void loadData(String percent, String year, String apiKey){
+        if (shouldFetchData(percent, year)){
+            Log.d(TAG, "fetching new forecast data for year: " + year + " percent: " + percent + "key: " + apiKey);
             this.currentYear = year;
             this.currentPercent = percent;
-            this.currentOrganic = organic;
+
             this.beerListDataMutableLiveData.setValue(null);
-            Call<BeerListDataList> req = this.breweryService.fetchBeer(percent, organic, year, apiKey);
+            Call<BeerListDataList> req = this.breweryService.fetchBeer(percent, year, apiKey);
             req.enqueue(new Callback<BeerListDataList>() {
                 @Override
                 public void onResponse(Call<BeerListDataList> call, Response<BeerListDataList> response) {
@@ -91,13 +91,13 @@ public class BeerListRepository {
         }
     }
 
-    private boolean shouldFetchData(String percent, String organic, String year){
+    private boolean shouldFetchData(String percent, String year){
         BeerListDataList beerListData = this.beerListDataMutableLiveData.getValue();
         if (beerListData == null){
             return true;
         }
 
-        if (!TextUtils.equals(year, this.currentYear) || !TextUtils.equals(percent, this.currentPercent) || !TextUtils.equals(organic, this.currentOrganic)) {
+        if (!TextUtils.equals(year, this.currentYear) || !TextUtils.equals(percent, this.currentPercent)) {
             return true;
         }
 

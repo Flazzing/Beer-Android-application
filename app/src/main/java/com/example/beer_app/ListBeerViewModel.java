@@ -27,8 +27,8 @@ public class ListBeerViewModel extends AndroidViewModel {
         return beerListRepositoryLiveData;
     }
 
-    public void loadData(String percent, String organic, String year, String apiKey){
-        this.beerListRepository.loadData(percent, organic, year, apiKey);
+    public void loadData(String percent, String year, String apiKey){
+        this.beerListRepository.loadData(percent, year, apiKey);
     }
 
     public void insertBeer(BeerListData beerListData){
