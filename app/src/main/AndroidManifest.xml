@@ -13,7 +13,11 @@
         android:theme="@style/Theme.Beer_app">
         <activity
             android:name=".BeerDetailActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ListBeer">
+        </activity>
+        <activity
+            android:name=".BreweryDetailActivity"
+            android:parentActivityName=".ListBrewery">
         </activity>
         <activity
             android:name=".RandoBeer"

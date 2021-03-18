@@ -15,8 +15,11 @@
     <string name="list_of_breweries">Found at: Breweries</string>
     <string name="beer_year">Year of Beer</string>
     <string name="beer_organic_status">Organic?</string>
+    <string name="favorites_add">Added to favorites!</string>
 
-    <!-- Strings for brewery list and descriptions    -->
+    <string name="share_beer_text">I love %1$s so much.The ABV is %2$s. It is %3$ss, and it is %4$s.</string>
+
+
     <string name="brewery_name">Brewery Name</string>
     <string name="brewery_year">Brewery Established</string>
     <string name="brewery_location">Brewery Location</string>

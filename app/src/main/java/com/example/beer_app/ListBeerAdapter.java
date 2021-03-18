@@ -22,7 +22,7 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
 
 
     private BeerListDataList beerListDataList;
-    private ListBeerAdapter.onListBeerItemClickListener onListBeerItemClickListener;
+    private OnBeertemClickListener onListBeerItemClickListener;
 
     public interface onListBeerItemClickListener {
         void onListBeerItemClick(BeerListData beerListData);
@@ -88,6 +88,7 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
                 @Override
                 public void onClick(View v) {
                     onListBeerItemClickListener.onListBeerItemClick(
+
                             beerListDataList.getBeerListData().get(getAdapterPosition())
                     );
                 }

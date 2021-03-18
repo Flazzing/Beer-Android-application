@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,14 +20,14 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beer_app.data.BeerListData;
 import com.example.beer_app.data.BeerListDataList;
 import com.example.beer_app.data.FavoritesData;
-import com.google.android.material.navigation.NavigationView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout ;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onListBeerItemClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
+
 
 
     private RecyclerView recyclerView;
@@ -47,10 +49,29 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
     private FavoritesAdapter favoritesAdapter;
     private FavoritesViewModel favoritesViewModel;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.beer_list);
+        swipeRefreshLayout = ( SwipeRefreshLayout ) findViewById ( R.id.swiperefreshlayout ) ;
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+        public void onRefresh() {
+
+           /* //Changing the text when refresh
+            textView.setText(" Now I am Refreshed ! ");*/
+
+            //setting Refreshing to false
+            swipeRefreshLayout.setRefreshing(false);
+
+        }
+        });
+
 
         this.errorMessage = findViewById(R.id.tv_error_message);
 
@@ -59,8 +80,8 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
                 new ViewModelProvider.AndroidViewModelFactory(getApplication()))
                 .get(FavoritesViewModel.class);
 
-        FavoritesData favoritesData = new FavoritesData("sample_id", "sample_name_from_list_beer");
-        this.favoritesViewModel.insertFavoritesData(favoritesData);
+//        FavoritesData favoritesData = new FavoritesData("sample_id", "sample_name_from_list_beer");
+//        this.favoritesViewModel.insertFavoritesData(favoritesData);
 
         //setup 1
         this.recyclerView = findViewById(R.id.beer_list_RV);
@@ -87,7 +108,6 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
                  listBeerAdapter.updateBeerData(beerListDataList);
              }
          });
-
     }
 
     @Override
@@ -142,5 +162,9 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
         Intent intent = new Intent(this, BeerDetailActivity.class);
         startActivity(intent);
         setResult(Activity.RESULT_OK);
-    }
+/*    public void onBeerItemClick(BeerListData beerListData) {
+        Intent intent = new Intent(this, BeerDetailActivity.class);
+        intent.putExtra(BeerDetailActivity.EXTRA_BeerList_DATA, beerListData);
+        startActivity(intent);
+    }*/
 }

@@ -20,9 +20,9 @@ import java.lang.reflect.Type;
 @Entity(tableName = "beerList")
 public class BeerListData implements Serializable {
 
-    public BeerListData(@NonNull String name,  String productionStatus, String isOrganic, String description, String abv) {
+    public BeerListData(@NonNull String name, String id, String productionStatus, String isOrganic, String description, String abv) {
         this.name = name;
-
+        this.id = id;
         this.productionStatus = productionStatus;
         this.isOrganic = isOrganic;
         this.description = description;
@@ -33,6 +33,9 @@ public class BeerListData implements Serializable {
     @NonNull
     @SerializedName("name")
     private String name;
+
+    @SerializedName("id")
+    private String id;
 
     @SerializedName("isRetired")
     private String productionStatus;
@@ -51,7 +54,7 @@ public class BeerListData implements Serializable {
         this.name = name;
     }
 
-
+    public void setId(@NonNull String id) { this.id = id; }
     public void setDescription(String description) {
         this.description = description;
     }
@@ -89,6 +92,8 @@ public class BeerListData implements Serializable {
         return abv;
     }
 
+    public String getId() { return id; }
+
 
     public static class JsonDeserializer implements com.google.gson.JsonDeserializer<BeerListData> {
         @Override
@@ -100,18 +105,18 @@ public class BeerListData implements Serializable {
             String tempABV = "Description is empty.";
 
             if (listObj == null ){
-                Log.d("Check checker", "here is empty");
+//                Log.d("Check checker", "here is empty");
                 tempDescription = "Description is empty.";
                 tempABV = "Description is empty.";
             }
             else {
-                Log.d("Check checker", "here is not empty");
+//                Log.d("Check checker", "here is not empty");
                 if (listObj.getAsJsonPrimitive("description") != null) {
                     tempDescription = listObj.getAsJsonPrimitive("description").getAsString();
                 }
 
                 if (listObj.getAsJsonPrimitive("abv") != null) {
-                    Log.d("checker", "abv");
+//                    Log.d("checker", "abv");
                     tempABV = listObj.getAsJsonPrimitive("abv").getAsString();
                 }
 
@@ -119,11 +124,11 @@ public class BeerListData implements Serializable {
 
             return new BeerListData(
                     listObj.getAsJsonPrimitive("name").getAsString(),
+                    listObj.getAsJsonPrimitive("id").getAsString(),
                     listObj.getAsJsonPrimitive("isRetired").getAsString(),
                     listObj.getAsJsonPrimitive("isOrganic").getAsString(),
                     tempDescription, tempABV
                     );
+        }
     }
-    }
-
 }
