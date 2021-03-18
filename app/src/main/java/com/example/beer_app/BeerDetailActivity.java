@@ -3,10 +3,14 @@ package com.example.beer_app;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +33,7 @@ public class BeerDetailActivity extends AppCompatActivity {
     private FavoritesData favoritesData;
     private boolean clicked;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private Toast favoriteToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,20 +124,35 @@ public class BeerDetailActivity extends AppCompatActivity {
 
     private void toggleFavoriteBookmark(MenuItem menuItem){
         if (this.beerListData != null){
-            this.isBookmarked = !this.isBookmarked;
+            FavoritesData favoritesData1 = new FavoritesData(beerListData.getId(), beerListData.getName(), beerListData.getDescription());
+            this.favoritesViewModel.insertFavoritesData(favoritesData1);
+            if (this.favoriteToast != null) {
+                this.favoriteToast.cancel();
+            }
+            String fav_add = "Added to Favorites!";
+            SpannableStringBuilder biggerText = new SpannableStringBuilder(fav_add);
+            biggerText.setSpan(new RelativeSizeSpan(1.35f), 0, fav_add.length(), 0);
+            this.favoriteToast = Toast.makeText(this, biggerText, Toast.LENGTH_SHORT);
+            this.favoriteToast.setGravity(Gravity.CENTER, 0, 0);
+            this.favoriteToast.show();
+
+
+           /* this.isBookmarked = !this.isBookmarked;
             menuItem.setChecked(this.isBookmarked);
             if (this.isBookmarked){
                 menuItem.setIcon(R.drawable.ic_favorited_beer);
                 Log.d("Test", "Bookmarked Added");
-                FavoritesData favoritesData = new FavoritesData("sample_id", beerListData.getName());
-                this.favoritesViewModel.insertFavoritesData(favoritesData);
+                //FavoritesData favoritesData = new FavoritesData("sample_id", beerListData.getName());
+                FavoritesData favoritesData1 = new FavoritesData(beerListData.getId(), beerListData.getName());
+                Log.d("favorites", favoritesData1.getId());
+                this.favoritesViewModel.insertFavoritesData(favoritesData1);
             }
             else {
                 menuItem.setIcon(R.drawable.ic_favorite_beer);
                 Log.d("Test", "Bookmarked Delete");
-                FavoritesData favoritesData = new FavoritesData("sample_id", beerListData.getName());
-                this.favoritesViewModel.deleteFavoritesData(favoritesData);
-            }
+               // FavoritesData favoritesData = new FavoritesData("sample_id", beerListData.getName());
+              //  this.favoritesViewModel.deleteFavoritesData(favoritesData);
+            }*/
         }
     }
 

@@ -1,7 +1,11 @@
 package com.example.beer_app;
 
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -22,6 +26,8 @@ public class FavoritesList extends AppCompatActivity
     private FavoritesAdapter favoritesAdapter;
     private static final String TAG = FavoritesList.class.getSimpleName();
     private FavoritesViewModel favoritesViewModel;
+    private Toast favoriteToast;
+    private Toast deleteToast;
 
 
 
@@ -73,6 +79,15 @@ public class FavoritesList extends AppCompatActivity
                 FavoritesData favoritesData = favoritesAdapter.getData(position);
                 favoritesAdapter.removeFavoritesData(position);
                 favoritesViewModel.deleteFavoritesData(favoritesData);
+                if (deleteToast != null) {
+                    deleteToast.cancel();
+                }
+                String deleteText= "Removed from Favorites";
+                SpannableStringBuilder biggerText = new SpannableStringBuilder(deleteText);
+                biggerText.setSpan(new RelativeSizeSpan(1.35f), 0, deleteText.length(), 0);
+                deleteToast = Toast.makeText(FavoritesList.this, biggerText, Toast.LENGTH_SHORT);
+                deleteToast.setGravity(Gravity.CENTER, 0, 0);
+                deleteToast.show();
 
             }
         };
@@ -83,6 +98,16 @@ public class FavoritesList extends AppCompatActivity
 
     @Override
     public void onFavoritesItemClick(FavoritesData favoritesData) {
+        if (this.favoriteToast != null) {
+            this.favoriteToast.cancel();
+        }
+        String descrip = favoritesData.getDescription();
+        SpannableStringBuilder biggerText = new SpannableStringBuilder(descrip);
+        biggerText.setSpan(new RelativeSizeSpan(1.35f), 0, descrip.length(), 0);
+        this.favoriteToast = Toast.makeText(this, biggerText, Toast.LENGTH_SHORT);
+        this.favoriteToast.setGravity(Gravity.CENTER, 0, 0);
+        this.favoriteToast.show();
+
 
     }
 }
