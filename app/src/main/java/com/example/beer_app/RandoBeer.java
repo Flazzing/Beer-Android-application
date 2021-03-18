@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.beer_app.data.BeerListData;
 import com.example.beer_app.data.RandoBeerData;
 import com.example.beer_app.data.RandoBeerDataItem;
 
@@ -56,4 +58,5 @@ public class RandoBeer extends AppCompatActivity {
             }
         });
     }
+
 }

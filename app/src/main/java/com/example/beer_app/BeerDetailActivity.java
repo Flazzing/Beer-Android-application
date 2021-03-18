@@ -22,16 +22,13 @@ public class BeerDetailActivity extends AppCompatActivity {
     public static final String EXTRA_BeerList_DATA = "BeerDetailActivity.BeerListDataList";
     public static final String EXTRA_RANDO_BEER_DATA = "BeerDetailActivity.RandoBeerData";
 
-
-
     private FavoritesViewModel favoritesViewModel;
     private BeerListData beerListData;
     private RandoBeerDataItem randoBeerDataItem;
     private boolean isBookmarked;
-
+    private FavoritesData favoritesData;
     private boolean clicked;
     private SwipeRefreshLayout swipeRefreshLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +47,9 @@ public class BeerDetailActivity extends AppCompatActivity {
                 if(randoBeerDataItem != null) {
                     Intent intent = new Intent(BeerDetailActivity.this, RandoBeer.class);
                     startActivity(intent);
-                    randoBeerDataItem = null;
                 }
-
-
             }
         });
-
 
 
         this.favoritesViewModel = new ViewModelProvider(this,
