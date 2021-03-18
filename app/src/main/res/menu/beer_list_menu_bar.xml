@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/favorite_beer_menu"
-        android:icon="@drawable/ic_favorite_beer"
+        android:icon="@drawable/ic_baseline_favorite_24"
         app:showAsAction="ifRoom"
         android:title="drawer_action"
         android:layout_gravity="left"/>
