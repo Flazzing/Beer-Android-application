@@ -167,4 +167,5 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
         intent.putExtra(BeerDetailActivity.EXTRA_BeerList_DATA, beerListData);
         startActivity(intent);
     }*/
+    }
 }
