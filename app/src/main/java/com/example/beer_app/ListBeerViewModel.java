@@ -29,11 +29,12 @@ public class ListBeerViewModel extends AndroidViewModel {
     public LiveData<BeerListDataList> getBeerListRepositoryLiveData() {
         return beerListRepositoryLiveData;
     }
+
+    public void loadData(String percent, String year, String apiKey){
+        this.beerListRepository.loadData(percent, year, apiKey);
     public LiveData<RandoBeerData> getRandomBeerLiveData() {
         return randomBeerLiveData;
-    }
-    public void loadData(String apiKey){
-        this.beerListRepository.loadData(apiKey);
+
     }
 
     public void insertBeer(BeerListData beerListData){

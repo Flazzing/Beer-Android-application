@@ -1,7 +1,9 @@
 package com.example.beer_app.data;
 
 import android.app.Application;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,7 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BeerListRepository {
     private BeerListDao beerListDao;
     private static final String TAG = BeerListRepository.class.getSimpleName();
-    private static final String BASE_URL = "https://sandbox-api.brewerydb.com/v2/beers/";
+    private static final String BASE_URL = "https://sandbox-api.brewerydb.com/v2/";
+  //  private static final String BASE_URL = "https://sandbox-api.brewerydb.com/v2/beers/";
     private static final String BASE_URL_RANDO = "https://sandbox-api.brewerydb.com/v2/beer/";
 
     private MutableLiveData<BeerListDataList> beerListDataMutableLiveData;
@@ -28,6 +31,10 @@ public class BeerListRepository {
     private BreweryService breweryServiceRando;
 
     private MutableLiveData<RandoBeerData> randomBeerMutableData;
+
+    private String currentYear;
+    private String currentPercent;
+    private String currentOrganic;
 
     public LiveData<BeerListDataList> getBeerListDataMutableLiveData() {
         return beerListDataMutableLiveData;
@@ -69,8 +76,7 @@ public class BeerListRepository {
         AppDatabase db = AppDatabase.getDatabase(application);
         this.beerListDao = db.beerListDao();
     }
-
-    public void getRandoBeer(String apiKey) {
+      public void getRandoBeer(String apiKey) {
         this.randomBeerMutableData.setValue(null);
         Call<RandoBeerData> req = this.breweryServiceRando.getRandomBeer(apiKey);
         req.enqueue(new Callback<RandoBeerData>() {
@@ -97,10 +103,18 @@ public class BeerListRepository {
             }
         });
     }
-    public void loadData(String apiKey){
-        if (shouldFetchData()){
+
+    public void loadData(String percent, String year, String apiKey){
+        if (shouldFetchData(percent, year)){
+            Log.d(TAG, "fetching new forecast data for year: " + year + " percent: " + percent + "key: " + apiKey);
+            this.currentYear = year;
+            this.currentPercent = percent;
+
+
+  //  public void loadData(String apiKey){
+    //    if (shouldFetchData()){
             this.beerListDataMutableLiveData.setValue(null);
-            Call<BeerListDataList> req = this.breweryService.fetchBeer(apiKey);
+            Call<BeerListDataList> req = this.breweryService.fetchBeer(percent, year, apiKey);
             req.enqueue(new Callback<BeerListDataList>() {
                 @Override
                 public void onResponse(Call<BeerListDataList> call, Response<BeerListDataList> response) {
@@ -126,9 +140,13 @@ public class BeerListRepository {
         }
     }
 
-    private boolean shouldFetchData(){
+    private boolean shouldFetchData(String percent, String year){
         BeerListDataList beerListData = this.beerListDataMutableLiveData.getValue();
         if (beerListData == null){
+            return true;
+        }
+
+        if (!TextUtils.equals(year, this.currentYear) || !TextUtils.equals(percent, this.currentPercent)) {
             return true;
         }
 

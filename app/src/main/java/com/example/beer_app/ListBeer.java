@@ -9,6 +9,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -27,9 +29,13 @@ import com.example.beer_app.data.FavoritesData;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout ;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ListBeer extends AppCompatActivity implements ListBeerAdapter.OnBeertemClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
+import static android.content.ContentValues.TAG;
+
+public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onListBeerItemClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
+
 
 
     private RecyclerView recyclerView;
@@ -38,6 +44,7 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.OnBee
     private ListBeerAdapter listBeerAdapter;
     private SharedPreferences sharedPreferences;
     private DrawerLayout drawerLayout;
+    private TextView errorMessage;
     private RecyclerView drawerListRV;
     private FavoritesAdapter favoritesAdapter;
     private FavoritesViewModel favoritesViewModel;
@@ -66,6 +73,7 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.OnBee
         });
 
 
+        this.errorMessage = findViewById(R.id.tv_error_message);
 
         //For testing, will move to beer detail once done implmenting
         this.favoritesViewModel = new ViewModelProvider(this,
@@ -85,13 +93,14 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.OnBee
         this.sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         // setup 3
-         listBeerAdapter = new ListBeerAdapter( this);
+        this.listBeerAdapter = new ListBeerAdapter( this);
+        this.recyclerView.setAdapter(listBeerAdapter);
 
-        recyclerView.setAdapter(listBeerAdapter);
 
-        this.listBeerViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(ListBeerViewModel.class);
+        this.listBeerViewModel = new ViewModelProvider(this).get(ListBeerViewModel.class);
 
-        this.listBeerViewModel.loadData(BREWERYDB_APPID);
+        this.loadBeerList();
+
 
          this.listBeerViewModel.getBeerListRepositoryLiveData().observe(this, new Observer<BeerListDataList>() {
              @Override
@@ -129,13 +138,33 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.OnBee
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        this.loadBeerList();
+    }
+
+    private void loadBeerList(){
+
+        this.listBeerViewModel.loadData(
+                this.sharedPreferences.getString(
+                        getString(R.string.pref_alc_percentage_key),
+                        ""
+                ),
+                this.sharedPreferences.getString(
+                        getString(R.string.pref_beer_year_key),
+                        ""
+                ),
+                BREWERYDB_APPID
+        );
 
     }
 
     @Override
-    public void onBeerItemClick(BeerListData beerListData) {
+    public void onListBeerItemClick(BeerListData beerListData) {
+        Intent intent = new Intent(this, BeerDetailActivity.class);
+        startActivity(intent);
+        setResult(Activity.RESULT_OK);
+/*    public void onBeerItemClick(BeerListData beerListData) {
         Intent intent = new Intent(this, BeerDetailActivity.class);
         intent.putExtra(BeerDetailActivity.EXTRA_BeerList_DATA, beerListData);
         startActivity(intent);
-    }
+    }*/
 }
