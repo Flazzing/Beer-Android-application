@@ -20,13 +20,13 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
 
 
     private BeerListDataList beerListDataList;
-    private ListBeerAdapter.onListBeerItemClickListener onListBeerItemClickListener;
+    private OnBeertemClickListener onListBeerItemClickListener;
 
-    public interface onListBeerItemClickListener {
-        void onForecastItemClick();
+    public interface OnBeertemClickListener {
+        void onBeerItemClick(BeerListData beerListData);
     }
 
-    public ListBeerAdapter(ListBeerAdapter.onListBeerItemClickListener onListBeerItemClickListener) {
+    public ListBeerAdapter(ListBeerAdapter.OnBeertemClickListener onListBeerItemClickListener) {
         this.onListBeerItemClickListener = onListBeerItemClickListener;
     }
 
@@ -79,6 +79,9 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
                 @Override
                 public void onClick(View v) {
                     // whwat to do when clicked
+                    onListBeerItemClickListener.onBeerItemClick(
+                            beerListDataList.getBeerListData().get(getAdapterPosition())
+                    );
                 }
             });
         }
