@@ -20,7 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ListBeerAdapter.onListBeerItemClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ListBeerAdapter.OnBeertemClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
       /*
@@ -90,13 +90,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
         }
-
-
-
    }
 
     @Override
-    public void onForecastItemClick() {
+    public void onBeerItemClick(BeerListData beerListData) {
 
     }
 }

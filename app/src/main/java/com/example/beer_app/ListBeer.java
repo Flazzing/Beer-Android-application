@@ -28,7 +28,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
-public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onListBeerItemClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
+public class ListBeer extends AppCompatActivity implements ListBeerAdapter.OnBeertemClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     private RecyclerView recyclerView;
@@ -40,6 +40,8 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
     private RecyclerView drawerListRV;
     private FavoritesAdapter favoritesAdapter;
     private FavoritesViewModel favoritesViewModel;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +81,6 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
                  listBeerAdapter.updateBeerData(beerListDataList);
              }
          });
-
-
-
     }
 
     @Override
@@ -90,10 +89,6 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
         super.onDestroy();
     }
 
-    @Override
-    public void onForecastItemClick() {
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,5 +112,12 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
+    }
+
+    @Override
+    public void onBeerItemClick(BeerListData beerListData) {
+        Intent intent = new Intent(this, BeerDetailActivity.class);
+        intent.putExtra(BeerDetailActivity.EXTRA_BeerList_DATA, beerListData);
+        startActivity(intent);
     }
 }
