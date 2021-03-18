@@ -11,4 +11,9 @@ public interface BreweryService {
             @Query("key") String apiKey
     );
 
+    @GET("random")
+    Call<RandoBeerData> getRandomBeer(
+        @Query("key") String apiKey
+    );
+
 }

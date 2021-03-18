@@ -20,7 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.beer_app.data.BeerListData;
 import com.example.beer_app.data.BeerListDataList;
 import com.example.beer_app.data.FavoritesData;
-import com.google.android.material.navigation.NavigationView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout ;
+
 
 import java.util.List;
 
@@ -36,11 +37,28 @@ public class ListBeer extends AppCompatActivity
     private FavoritesAdapter favoritesAdapter;
     private FavoritesViewModel favoritesViewModel;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.beer_list);
+        swipeRefreshLayout = ( SwipeRefreshLayout ) findViewById ( R.id.swiperefreshlayout ) ;
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+        public void onRefresh() {
+
+           /* //Changing the text when refresh
+            textView.setText(" Now I am Refreshed ! ");*/
+
+            //setting Refreshing to false
+            swipeRefreshLayout.setRefreshing(false);
+
+        }
+        });
+
 
 
         //For testing, will move to beer detail once done implmenting

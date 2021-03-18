@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import com.example.beer_app.data.BeerListData;
 import com.example.beer_app.data.BeerListDataList;
 import com.example.beer_app.data.BeerListRepository;
+import com.example.beer_app.data.RandoBeerData;
 
 import java.util.List;
 
@@ -16,17 +17,21 @@ public class ListBeerViewModel extends AndroidViewModel {
 
     private BeerListRepository beerListRepository;
     private LiveData<BeerListDataList> beerListRepositoryLiveData;
+    private LiveData<RandoBeerData> randomBeerLiveData;
 
     public ListBeerViewModel(@NonNull Application application) {
         super(application);
         this.beerListRepository = new BeerListRepository(application);
         this.beerListRepositoryLiveData = beerListRepository.getBeerListDataMutableLiveData();
+        this.randomBeerLiveData = beerListRepository.getRandomBeerDataMutableLiveData();
     }
 
     public LiveData<BeerListDataList> getBeerListRepositoryLiveData() {
         return beerListRepositoryLiveData;
     }
-
+    public LiveData<RandoBeerData> getRandomBeerLiveData() {
+        return randomBeerLiveData;
+    }
     public void loadData(String apiKey){
         this.beerListRepository.loadData(apiKey);
     }
@@ -37,6 +42,10 @@ public class ListBeerViewModel extends AndroidViewModel {
 
     public void deleteBeer(BeerListData beerListData){
         this.beerListRepository.deleteBeer(beerListData);
+    }
+
+    public void getRandoBeer(String apiKey) {
+        this.beerListRepository.getRandoBeer(apiKey);
     }
 
 
