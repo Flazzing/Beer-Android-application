@@ -56,4 +56,5 @@
     <string name="pref_units_default_value" translatable="false">@string/pref_units_lt10_value</string>
 
     <string name="drawer_title">Favorites</string>
+    <string name="loading_error">No beers were found! Please adjust preferences in filters!</string>
 </resources>

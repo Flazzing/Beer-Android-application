@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -29,6 +31,8 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
+
 public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onListBeerItemClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
 
@@ -38,6 +42,7 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
     private ListBeerAdapter listBeerAdapter;
     private SharedPreferences sharedPreferences;
     private DrawerLayout drawerLayout;
+    private TextView errorMessage;
     private RecyclerView drawerListRV;
     private FavoritesAdapter favoritesAdapter;
     private FavoritesViewModel favoritesViewModel;
@@ -47,6 +52,7 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.beer_list);
 
+        this.errorMessage = findViewById(R.id.tv_error_message);
 
         //For testing, will move to beer detail once done implmenting
         this.favoritesViewModel = new ViewModelProvider(this,
@@ -74,15 +80,13 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
 
         this.loadBeerList();
 
+
          this.listBeerViewModel.getBeerListRepositoryLiveData().observe(this, new Observer<BeerListDataList>() {
              @Override
              public void onChanged(BeerListDataList beerListDataList) {
                  listBeerAdapter.updateBeerData(beerListDataList);
              }
          });
-
-
-
 
     }
 
@@ -130,6 +134,7 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
                 ),
                 BREWERYDB_APPID
         );
+
     }
 
     @Override

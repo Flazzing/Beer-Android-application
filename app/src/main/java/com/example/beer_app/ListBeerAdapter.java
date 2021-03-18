@@ -55,7 +55,12 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
     public int getItemCount() {
         if (this.beerListDataList != null){
             Log.d(TAG, "fetching new forecast data for year: " + beerListDataList.getBeerListData() );
-            return this.beerListDataList.getBeerListData().size();
+            if(beerListDataList.getBeerListData() == null){
+                return 0;
+            }
+            else{
+                return this.beerListDataList.getBeerListData().size();
+            }
         }
         else {
             return 0;
