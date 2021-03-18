@@ -16,15 +16,18 @@ import com.example.beer_app.data.BeerListDataList;
 
 import java.util.List;
 
-public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBeeerItemViewHolder>{
+import static android.content.ContentValues.TAG;
+
+public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBeerItemViewHolder>{
 
 
     private BeerListDataList beerListDataList;
     private ListBeerAdapter.onListBeerItemClickListener onListBeerItemClickListener;
 
     public interface onListBeerItemClickListener {
-        void onForecastItemClick();
+        void onListBeerItemClick(BeerListData beerListData);
     }
+
 
     public ListBeerAdapter(ListBeerAdapter.onListBeerItemClickListener onListBeerItemClickListener) {
         this.onListBeerItemClickListener = onListBeerItemClickListener;
@@ -32,14 +35,14 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
 
     @NonNull
     @Override
-    public ListBeeerItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListBeerItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.beer_list_item, parent, false);
-        return new ListBeerAdapter.ListBeeerItemViewHolder(itemView);
+        return new ListBeerAdapter.ListBeerItemViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListBeeerItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListBeerItemViewHolder holder, int position) {
         holder.bind(this.beerListDataList.getBeerListData().get(position));
     }
 
@@ -51,6 +54,7 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
     @Override
     public int getItemCount() {
         if (this.beerListDataList != null){
+            Log.d(TAG, "fetching new forecast data for year: " + beerListDataList.getBeerListData() );
             return this.beerListDataList.getBeerListData().size();
         }
         else {
@@ -58,7 +62,7 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
         }
     }
 
-    class ListBeeerItemViewHolder extends RecyclerView.ViewHolder {
+    class ListBeerItemViewHolder extends RecyclerView.ViewHolder {
 
         final private TextView textView_name;
         final private TextView textView_isRetired;
@@ -66,7 +70,7 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
         final private TextView textView_description;
         final private TextView textView_abv;
 
-        public ListBeeerItemViewHolder(@NonNull View itemView) {
+        public ListBeerItemViewHolder(@NonNull View itemView) {
             super(itemView);
             textView_name = itemView.findViewById(R.id.beerName_tv);
             textView_description = itemView.findViewById(R.id.beer_description_tv);
@@ -78,7 +82,9 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // whwat to do when clicked
+                    onListBeerItemClickListener.onListBeerItemClick(
+                            beerListDataList.getBeerListData().get(getAdapterPosition())
+                    );
                 }
             });
         }

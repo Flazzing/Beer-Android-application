@@ -26,6 +26,7 @@ import com.example.beer_app.data.BeerListDataList;
 import com.example.beer_app.data.FavoritesData;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onListBeerItemClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
@@ -65,13 +66,13 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
         this.sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         // setup 3
-         listBeerAdapter = new ListBeerAdapter( this);
+        this.listBeerAdapter = new ListBeerAdapter( this);
+        this.recyclerView.setAdapter(listBeerAdapter);
 
-        recyclerView.setAdapter(listBeerAdapter);
 
-        this.listBeerViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(ListBeerViewModel.class);
+        this.listBeerViewModel = new ViewModelProvider(this).get(ListBeerViewModel.class);
 
-        this.listBeerViewModel.loadData(BREWERYDB_APPID);
+        this.loadBeerList();
 
          this.listBeerViewModel.getBeerListRepositoryLiveData().observe(this, new Observer<BeerListDataList>() {
              @Override
@@ -79,6 +80,7 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
                  listBeerAdapter.updateBeerData(beerListDataList);
              }
          });
+
 
 
 
@@ -90,10 +92,6 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
         super.onDestroy();
     }
 
-    @Override
-    public void onForecastItemClick() {
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -116,6 +114,32 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        this.loadBeerList();
+    }
 
+    private void loadBeerList(){
+
+        this.listBeerViewModel.loadData(
+                this.sharedPreferences.getString(
+                        "8,10",
+                        "8,10"
+                ),
+                this.sharedPreferences.getString(
+                        "Y",
+                        "Y"
+                ),
+                this.sharedPreferences.getString(
+                        "2015",
+                        "2015"
+                ),
+                BREWERYDB_APPID
+
+        );
+    }
+
+    @Override
+    public void onListBeerItemClick(BeerListData beerListData) {
+        Intent intent = new Intent(this, BeerDetailActivity.class);
+        startActivity(intent);
     }
 }
