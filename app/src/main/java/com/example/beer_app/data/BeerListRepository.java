@@ -122,7 +122,7 @@ public class BeerListRepository {
                 }
             });
         } else {
-            Log.d(TAG, "using cached forecast data for location: " );
+            Log.d(TAG, "using cached data: beers" );
         }
     }
 

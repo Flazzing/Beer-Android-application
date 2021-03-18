@@ -42,28 +42,41 @@ public class BreweryListRepository {
     }
 
     public void loadSearchResults() {
-        this.breweriesList.setValue(null);
-        Log.d(TAG, "loading search results");
-        Call<BreweryListDataList> results = this.breweriesService.searchBreweries();
-        results.enqueue(new Callback<BreweryListDataList>() {
-            @Override
-            public void onResponse(Call<BreweryListDataList> call, Response<BreweryListDataList> response) {
-                if(response.code() == 200) {
-                    Log.d(TAG, "Response came back : " + response.body());
-                    breweriesList.setValue(response.body().breweryListData);
-                }
-                else {
+        if(runQuery()) {
+            this.breweriesList.setValue(null);
+            Log.d(TAG, "loading new search results");
+            Call<BreweryListDataList> results = this.breweriesService.searchBreweries();
+            results.enqueue(new Callback<BreweryListDataList>() {
+                @Override
+                public void onResponse(Call<BreweryListDataList> call, Response<BreweryListDataList> response) {
+                    if (response.code() == 200) {
+                        Log.d(TAG, "Success API request: " + call.request().url());
+                        breweriesList.setValue(response.body().breweryListData);
+                    } else {
 //                    Log.w(TAG,  new Gson().toJson(response));
-                    Log.d(TAG, "unsuccessful API request: " + call.request().url());
-                    Log.d(TAG, "  -- response status code: " + response.code());
-                    Log.d(TAG, "  -- response: " + response.toString());
+                        Log.d(TAG, "unsuccessful API request: " + call.request().url());
+                        Log.d(TAG, "  -- response status code: " + response.code());
+                        Log.d(TAG, "  -- response: " + response.toString());
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<BreweryListDataList> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+                @Override
+                public void onFailure(Call<BreweryListDataList> call, Throwable t) {
+                    Log.d(TAG, "unsuccessful API request: " + call.request().url());
+                    t.printStackTrace();
+                }
+            });
+        } else {
+            Log.d(TAG, "using cached data: breweries");
+        }
+    }
+
+    private boolean runQuery() {
+//        if (breweriesList.getValue() == null) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+        return breweriesList.getValue() == null;
     }
 }
