@@ -114,7 +114,7 @@ public class BeerDetailActivity extends AppCompatActivity {
             productionStatus = "no longer in production";
         }
         else {
-            productionStatus = "is still producing more.";
+            productionStatus = "is still producing more";
         }
 
 
