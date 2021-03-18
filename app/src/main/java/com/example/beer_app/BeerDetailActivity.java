@@ -11,17 +11,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.beer_app.data.BeerListData;
 import com.example.beer_app.data.BeerListDataList;
 import com.example.beer_app.data.FavoritesData;
+import com.example.beer_app.data.RandoBeerDataItem;
 
 public class BeerDetailActivity extends AppCompatActivity {
     public static final String EXTRA_BeerList_DATA = "BeerDetailActivity.BeerListDataList";
+    public static final String EXTRA_RANDO_BEER_DATA = "BeerDetailActivity.RandoBeerData";
+
+
 
     private FavoritesViewModel favoritesViewModel;
     private BeerListData beerListData;
+    private RandoBeerDataItem randoBeerDataItem;
     private boolean isBookmarked;
+
+    private boolean clicked;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +39,24 @@ public class BeerDetailActivity extends AppCompatActivity {
         setContentView(R.layout.beer_description);
 
         this.isBookmarked = false;
+
+        this.clicked = false;
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById ( R.id.Refresher ) ;
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+                if(randoBeerDataItem != null) {
+                    Intent intent = new Intent(BeerDetailActivity.this, RandoBeer.class);
+                    startActivity(intent);
+                    randoBeerDataItem = null;
+                }
+
+
+            }
+        });
+
 
 
         this.favoritesViewModel = new ViewModelProvider(this,
@@ -53,7 +81,24 @@ public class BeerDetailActivity extends AppCompatActivity {
 
         }
 
-        this.favoritesViewModel = new ViewModelProvider(this,
+        Intent intentRando = getIntent();
+        if (intent != null && intent.hasExtra(EXTRA_RANDO_BEER_DATA)) {
+            this.randoBeerDataItem = (RandoBeerDataItem) intent.getSerializableExtra(EXTRA_RANDO_BEER_DATA);
+            Log.d("rando beer", randoBeerDataItem.getDescription());
+            TextView beerNameTV = findViewById(R.id.beer_name_detail_tv);
+            beerNameTV.setText(randoBeerDataItem.getName());
+            TextView beerDescriptionTV = findViewById(R.id.beer_description_detail_tv);
+            beerDescriptionTV.setText(randoBeerDataItem.getDescription());
+            TextView beerABVTV = findViewById(R.id.beer_abv_detail_tv);
+            beerABVTV.setText(randoBeerDataItem.getAbv());
+            TextView beerOrganicTV = findViewById(R.id.beer_organic_detail_tv);
+            beerOrganicTV.setText(randoBeerDataItem.isOrganic());
+            TextView beerIsRetiredTV = findViewById(R.id.beer_isRetired_detail_tv);
+            beerIsRetiredTV.setText(randoBeerDataItem.getIsRetired());
+        }
+
+
+            this.favoritesViewModel = new ViewModelProvider(this,
                 new ViewModelProvider.AndroidViewModelFactory(getApplication()))
                 .get(FavoritesViewModel.class);
 

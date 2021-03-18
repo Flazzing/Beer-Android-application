@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beer_app.data.FavoritesData;
+import com.example.beer_app.data.RandoBeerDataItem;
 
 import java.util.List;
 

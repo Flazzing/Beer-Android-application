@@ -23,4 +23,6 @@ public class RandoBeerData implements Serializable {
         this.randoBeerDataItem = null;
     }
 
+
+
 }
