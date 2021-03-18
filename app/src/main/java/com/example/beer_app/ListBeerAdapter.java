@@ -22,7 +22,7 @@ public class ListBeerAdapter extends RecyclerView.Adapter<ListBeerAdapter.ListBe
 
 
     private BeerListDataList beerListDataList;
-    private OnBeertemClickListener onListBeerItemClickListener;
+    private onListBeerItemClickListener onListBeerItemClickListener;
 
     public interface onListBeerItemClickListener {
         void onListBeerItemClick(BeerListData beerListData);
