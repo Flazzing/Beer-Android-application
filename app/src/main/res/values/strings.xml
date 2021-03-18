@@ -19,7 +19,6 @@
     <string name="share_beer_text">I love %1$s so much.The ABV is %2s. It is %4s, and it is %5s.</string>
 
 
-    <!-- Strings for brewery list and descriptions    -->
     <string name="brewery_name">Brewery Name</string>
     <string name="brewery_year">Brewery Established</string>
     <string name="brewery_location">Brewery Location</string>
