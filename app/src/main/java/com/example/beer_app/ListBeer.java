@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -160,8 +161,10 @@ public class ListBeer extends AppCompatActivity implements ListBeerAdapter.onLis
     @Override
     public void onListBeerItemClick(BeerListData beerListData) {
         Intent intent = new Intent(this, BeerDetailActivity.class);
+        intent.putExtra(BeerDetailActivity.EXTRA_BeerList_DATA, beerListData);
         startActivity(intent);
-        setResult(Activity.RESULT_OK);
+
+        // setResult(Activity.RESULT_OK);
 /*    public void onBeerItemClick(BeerListData beerListData) {
         Intent intent = new Intent(this, BeerDetailActivity.class);
         intent.putExtra(BeerDetailActivity.EXTRA_BeerList_DATA, beerListData);
