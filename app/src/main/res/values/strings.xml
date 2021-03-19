@@ -17,7 +17,7 @@
     <string name="beer_organic_status">Organic?</string>
     <string name="favorites_add">Added to favorites!</string>
 
-    <string name="share_beer_text">I love %1$s so much.The ABV is %2$s. It is %3$ss, and it is %4$s.</string>
+    <string name="share_beer_text">I love %1$s so much.</string>
 
 
     <string name="brewery_name">Brewery Name</string>

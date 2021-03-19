@@ -158,30 +158,19 @@ public class BeerDetailActivity extends AppCompatActivity {
 
     private void shareBeerText() {
 
-        String isOrganic;
-        String productionStatus;
+      //  String isOrganic;
+      //  String productionStatus;
+        String name = "Empty";
 
-        if ( this.beerListData.getIsOrganic() == "N"){
-            isOrganic = "not organic";
+        if(this.beerListData != null) {
+            name = beerListData.getName();
+        } else if (this.randoBeerDataItem != null) {
+            name = randoBeerDataItem.getName();
         }
-        else {
-            isOrganic = "is organic";
-        }
-
-        if ( this.beerListData.getProductionStatus() == "N"){
-            productionStatus = "no longer in production";
-        }
-        else {
-            productionStatus = "is still producing more";
-        }
-
 
         String shareText = getString(
                 R.string.share_beer_text,
-                this.beerListData.getName(),
-                this.beerListData.getAbv(),
-                isOrganic,
-                productionStatus
+                name
         );
 
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
