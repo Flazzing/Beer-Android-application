@@ -1,7 +1,7 @@
 # A beer a day Android application CS492 final project
 
 ## Description
-This project is about setting up an android application that helps inform user about the beer that is available in the US market. 
+This project is about an android application that helps inform user about the beer that is available in the US market. There is many fun feature within the application and hopefully you can give it a spin.
 
 
 ## This project relies on the api stated as below. 
